@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./styles/LoginModal.css";
 
-function RegisterModal({ closeModal }) {
+function LoginModal({ closeModal, setAuthenticated }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -16,6 +18,9 @@ function RegisterModal({ closeModal }) {
       );
 
       if (response.status === 200) {
+        // setAuthenticated(true);
+        closeModal();
+        navigate("/dashboard");
         console.log("you are logged in!");
       } else {
         console.log("your credentials are not correct");
@@ -49,4 +54,4 @@ function RegisterModal({ closeModal }) {
   );
 }
 
-export default RegisterModal;
+export default LoginModal;
