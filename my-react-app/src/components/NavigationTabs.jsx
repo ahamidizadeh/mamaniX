@@ -1,26 +1,50 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "./styles/NavigationTabs.css"; // Import your CSS file
 
-function NavigationTabs({ activeTab, setActiveTab }) {
-  const tabs = [
-    { id: "search", label: "Search" },
-    { id: "add-recipe", label: "Add Recipe" },
-    { id: "favorites", label: "Favorites" },
-    { id: "previously-tried", label: "Previously Tried" },
-  ];
-
+function NavigationTabs({ setActiveTab }) {
   return (
     <div className="navigation-tabs">
-      {tabs.map((tab) => (
-        <Link
-          key={tab.id}
-          to={`/${tab.id}`}
-          className={activeTab === tab.id ? "active" : ""}
-          onClick={() => setActiveTab(tab.id)}
-        >
-          {tab.label}
-        </Link>
-      ))}
+      <NavLink
+        to="/dashboard/search"
+        className="tab-link"
+        activeClassName="active-tab"
+        onClick={() => setActiveTab("search")}
+      >
+        Search
+      </NavLink>
+      <NavLink
+        to="/dashboard/add-recipe"
+        className="tab-link"
+        activeClassName="active-tab"
+        onClick={() => setActiveTab("add-recipe")}
+      >
+        Add Recipe
+      </NavLink>
+      <NavLink
+        to="/dashboard/favorites"
+        className="tab-link"
+        activeClassName="active-tab"
+        onClick={() => setActiveTab("favorites")}
+      >
+        Favorites
+      </NavLink>
+      <NavLink
+        to="/dashboard/previously-tried"
+        className="tab-link"
+        activeClassName="active-tab"
+        onClick={() => setActiveTab("previously-tried")}
+      >
+        Tried Before
+      </NavLink>
+      <NavLink
+        to="/dashboard/shopping-list"
+        className="tab-link"
+        activeClassName="active-tab"
+        onClick={() => setActiveTab("shopping-list")}
+      >
+        Shopping List
+      </NavLink>
     </div>
   );
 }

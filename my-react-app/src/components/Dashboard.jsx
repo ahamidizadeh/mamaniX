@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ProfileSection from "./ProfileSection";
 import NavigationTabs from "./NavigationTabs";
 import SearchTab from "./SearchTab";
+import ShoppingListTab from "./ShoppingListTab";
 import AddRecipeTab from "./AddRecipeTab";
 import FavoritesTab from "./FavoritesTab";
 import PreviouslyTriedTab from "./PreviouslyTriedTab";
+import "./styles/Dashboard.css";
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("search");
@@ -13,14 +15,18 @@ function Dashboard() {
   return (
     <div className="dashboard">
       <ProfileSection />
-      <NavigationTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="tab-content">
-        <Routes>
-          <Route path="/" element={<SearchTab />} />
-          <Route path="/add-recipe" element={<AddRecipeTab />} />
-          <Route path="/favorites" element={<FavoritesTab />} />
-          <Route path="/previously-tried" element={<PreviouslyTriedTab />} />
-        </Routes>
+      <div className="content">
+        <NavigationTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+
+        <div className="tab-content">
+          <Routes>
+            <Route path="/search" element={<SearchTab />} />
+            <Route path="/add-recipe" element={<AddRecipeTab />} />
+            <Route path="/favorites" element={<FavoritesTab />} />
+            <Route path="/previously-tried" element={<PreviouslyTriedTab />} />
+            <Route path="/shopping-list" element={<ShoppingListTab />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );
