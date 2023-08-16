@@ -1,23 +1,11 @@
 .navigation-tabs {
-  align-items: center;
+  position: absolute;
+  left: 40%;
+  right: 50%;
   display: flex;
-  justify-content: space-around;
-  background-color: inherit;
-  padding: 10px 0;
-  margin-left: 300px;
-  margin-top: 0px; /* Adjust the margin as needed */
+  top: 0;
 }
-
 .tab-link {
-  margin-top: 0px;
-  align-items: center;
-  text-decoration: none;
-  color: rgb(164, 151, 151);
-  padding: 10px 15px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  color: black;
+  margin: 25px;
 }
-
-/* .tab-link.active {
-  background-color: #ddd;
-} */

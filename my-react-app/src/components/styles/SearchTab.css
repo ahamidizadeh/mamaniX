@@ -1,0 +1,15 @@
+.search-input {
+  width: 500px;
+  height: 50px;
+  border-radius: 5px;
+  text-align: center;
+  color: black;
+  background-color: white;
+}
+
+.recipe-box {
+  display: grid;
+  gap: 20px;
+  margin: 15px;
+  width: 500px;
+}

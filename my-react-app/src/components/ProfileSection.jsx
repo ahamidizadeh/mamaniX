@@ -1,5 +1,6 @@
 // ProfileSection.jsx
 import React from "react";
+import "./styles/ProfileSection.css";
 
 function ProfileSection() {
   // Replace with actual user data
@@ -10,7 +11,7 @@ function ProfileSection() {
   };
 
   return (
-    <div className="profile-section">
+    <div className="profileSection">
       <img alt="Profile" />
       <div className="user-info">
         <h2>{user.name}</h2>

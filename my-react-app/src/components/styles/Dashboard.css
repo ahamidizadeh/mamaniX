@@ -1,37 +1,17 @@
 .dashboard {
-  display: inline-block;
-  /* flex-direction: column; */
+  display: flex;
 }
 
-.content {
-  margin-left: 20px;
-  /* display: flex;
-  flex-direction: column; */
-  align-items: center;
-  width: 100%;
-  padding-left: 20px; /* Add left padding for space */
-}
-.navigationTabs {
-  margin-top: 0px;
-}
 .tab-content {
+  width: 600px;
+  color: black;
+  position: absolute;
+  left: 40%;
+  right: 50%;
+  top: 25%;
+  bottom: 50%;
+}
+/* .profile-section {
+  position: fixed;
   top: 0px;
-}
-
-.profile-section {
-  margin-left: 20px;
-  margin-top: 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 300px; /* Adjust the width as needed */
-  background-color: inherit;
-  padding: 10px;
-  /* Add any other styling you want */
-}
-.navigation-tabs {
-  position: fixed;
-  top: 0;
-  margin-top: 20px;
-  align-items: center;
-}
+} */

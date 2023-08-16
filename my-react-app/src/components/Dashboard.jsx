@@ -18,15 +18,13 @@ function Dashboard() {
       <div className="content">
         <NavigationTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
-        <div className="tab-content">
-          <Routes>
-            <Route path="/search" element={<SearchTab />} />
-            <Route path="/add-recipe" element={<AddRecipeTab />} />
-            <Route path="/favorites" element={<FavoritesTab />} />
-            <Route path="/previously-tried" element={<PreviouslyTriedTab />} />
-            <Route path="/shopping-list" element={<ShoppingListTab />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/search" element={<SearchTab />} />
+          <Route path="/add-recipe" element={<AddRecipeTab />} />
+          <Route path="/favorites" element={<FavoritesTab />} />
+          <Route path="/previously-tried" element={<PreviouslyTriedTab />} />
+          <Route path="/shopping-list" element={<ShoppingListTab />} />
+        </Routes>
       </div>
     </div>
   );
