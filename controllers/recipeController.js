@@ -5,13 +5,13 @@ const Recipe = require("../db/models/recipe"); // Import your Recipe model
 // Route to add a new recipe
 router.post("/", async (req, res) => {
   try {
-    const { title, description, image, ingredients, instructions } = req.body;
-
+    const { title, image, cookingTime, ingredients, instructions } = req.body;
+    // console.log(req.body);
     // Create a new recipe document in the database
     const newRecipe = new Recipe({
       title,
-      description,
       image,
+      cookingTime,
       ingredients,
       instructions,
     });

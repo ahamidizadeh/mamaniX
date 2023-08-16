@@ -7,6 +7,7 @@ function AddRecipeTab() {
   const [recipeData, setRecipeData] = useState({
     title: "",
     image: "",
+    cookingTime: "",
     ingredients: [],
     instructions: "",
   });
@@ -19,13 +20,13 @@ function AddRecipeTab() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      // Send POST request to add recipe
-      // await axios.post("/api/recipes", recipeData);
+      await axios.post("http://localhost:1234/api/recipes", recipeData);
 
       // Clear form fields
       setRecipeData({
         title: "",
         image: "",
+        cookingTime: "",
         ingredients: [],
         instructions: "",
       });
@@ -77,6 +78,13 @@ function AddRecipeTab() {
           onChange={handleInputChange}
         />
 
+        <label className="titleAddRecipe">Cooking Time:</label>
+        <input
+          type="text"
+          name="cookingTime"
+          value={recipeData.cookingTime}
+          onChange={handleInputChange}
+        />
         <label className="titleAddRecipe">Ingredients:</label>
 
         <div className="ingridentsAddRecipe">

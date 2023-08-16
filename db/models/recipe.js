@@ -10,6 +10,10 @@ const recipeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  cookingTime: {
+    type: String,
+    required: true,
+  },
   ingredients: [
     {
       name: String,

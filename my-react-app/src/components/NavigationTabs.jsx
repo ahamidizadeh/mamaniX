@@ -8,7 +8,7 @@ function NavigationTabs({ setActiveTab }) {
       <NavLink
         to="/dashboard/search"
         className="tab-link"
-        activeClassName="active-tab"
+        activeclassname="active-tab"
         onClick={() => setActiveTab("search")}
       >
         Search
@@ -16,7 +16,7 @@ function NavigationTabs({ setActiveTab }) {
       <NavLink
         to="/dashboard/add-recipe"
         className="tab-link"
-        activeClassName="active-tab"
+        activeclassname="active-tab"
         onClick={() => setActiveTab("add-recipe")}
       >
         Add Recipe
@@ -24,7 +24,7 @@ function NavigationTabs({ setActiveTab }) {
       <NavLink
         to="/dashboard/favorites"
         className="tab-link"
-        activeClassName="active-tab"
+        activeclassname="active-tab"
         onClick={() => setActiveTab("favorites")}
       >
         Favorites
@@ -32,7 +32,7 @@ function NavigationTabs({ setActiveTab }) {
       <NavLink
         to="/dashboard/previously-tried"
         className="tab-link"
-        activeClassName="active-tab"
+        activeclassname="active-tab"
         onClick={() => setActiveTab("previously-tried")}
       >
         Tried Before
@@ -40,7 +40,7 @@ function NavigationTabs({ setActiveTab }) {
       <NavLink
         to="/dashboard/shopping-list"
         className="tab-link"
-        activeClassName="active-tab"
+        activeclassname="active-tab"
         onClick={() => setActiveTab("shopping-list")}
       >
         Shopping List
