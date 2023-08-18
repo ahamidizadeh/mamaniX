@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import "./styles/AddRecipeTab.css";
+import api from "../utils/api";
 
 function AddRecipeTab() {
   const [ingredient, setIngredient] = useState({ name: "", quantity: "" });
@@ -20,7 +21,7 @@ function AddRecipeTab() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:1234/api/recipes", recipeData);
+      await api.post("/recipes", recipeData);
 
       // Clear form fields
       setRecipeData({
@@ -30,8 +31,6 @@ function AddRecipeTab() {
         ingredients: [],
         instructions: "",
       });
-
-      // Optionally refetch recipes from backend or update state
     } catch (error) {
       // Handle error
       console.error("Error adding recipe:", error);

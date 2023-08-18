@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./styles/RegisterModal.css";
-import axios from "axios";
-
+// import axios from "axios";
+import api from "../utils/api";
 function RegisterModal({ closeModal }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -12,13 +12,13 @@ function RegisterModal({ closeModal }) {
     const userData = { username, password };
 
     try {
-      const response = await axios.post(
-        "http://localhost:1234/api/register",
-        userData
-      );
+      const response = await api.post("/register", userData);
 
-      if (response.status === 200) {
-        console.log("you are now registered!");
+      if (response.status === 201) {
+        const token = response.data.token;
+
+        console.log("you are now registered!", token);
+        localStorage.setItem("authToken", token);
       } else {
         console.log("registration failed");
       }

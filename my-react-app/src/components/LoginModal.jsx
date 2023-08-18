@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import api from "../utils/api";
 import "./styles/LoginModal.css";
 
 function LoginModal({ closeModal, setAuthenticated }) {
@@ -12,16 +13,17 @@ function LoginModal({ closeModal, setAuthenticated }) {
     event.preventDefault();
     const userData = { username, password };
     try {
-      const response = await axios.post(
-        "http://localhost:1234/api/login",
-        userData
-      );
+      const response = await api.post("/login", userData);
 
       if (response.status === 200) {
         // setAuthenticated(true);
+        const token = response.data.token;
+        console.log(token);
+        localStorage.setItem("authToken", token);
+
         closeModal();
         navigate("/dashboard");
-        console.log("you are logged in!");
+        console.log("you are logged in!", token);
       } else {
         console.log("your credentials are not correct");
       }

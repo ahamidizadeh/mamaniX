@@ -6,13 +6,9 @@ const RecipeCard = ({ recipe }) => {
     <div className="recipe-card">
       <img src={recipe.image} alt={recipe.title} className="recipe-image" />
       <h3 className="recipe-title">{recipe.title}</h3>
+      <h3 className="recipe-contributor">{recipe.contributor}</h3>
+      <h3 className="recipe-cookingTime">{recipe.cookingTime}</h3>
       <p className="recipe-rating">Rating: {recipe.rating}</p>
-      <ul className="recipe-ingredients">
-        {recipe.ingredients.map((ingredient, index) => (
-          <li key={index}>{ingredient}</li>
-        ))}
-      </ul>
-      <p className="recipe-instructions">{recipe.instructions}</p>
     </div>
   );
 };
