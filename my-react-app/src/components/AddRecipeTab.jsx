@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 // import axios from "axios";
+
 import "./styles/AddRecipeTab.css";
 import api from "../utils/api";
 
@@ -7,11 +8,20 @@ function AddRecipeTab() {
   const [ingredient, setIngredient] = useState({ name: "", quantity: "" });
   const [recipeData, setRecipeData] = useState({
     title: "",
-    image: "",
+    image: null,
     cookingTime: "",
     ingredients: [],
     instructions: "",
   });
+
+  const handleImageUpload = (event) => {
+    const selectedImage = event.target.files[0];
+
+    setRecipeData((prevData) => ({
+      ...prevData,
+      image: selectedImage,
+    }));
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -20,13 +30,24 @@ function AddRecipeTab() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("image", recipeData.image);
+    formData.append("title", recipeData.title);
+    formData.append("cookingTime", recipeData.cookingTime);
+    formData.append("ingridients", recipeData.ingredients);
+    formData.append("instructions", recipeData.instructions);
     try {
-      await api.post("/recipes", recipeData);
+      await api.post("/recipes", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       // Clear form fields
       setRecipeData({
         title: "",
-        image: "",
+        image: null,
         cookingTime: "",
         ingredients: [],
         instructions: "",
@@ -54,7 +75,6 @@ function AddRecipeTab() {
       }));
     }
     setIngredient({ name: "", quantity: "" });
-    console.log(recipeData.ingredients);
   };
 
   return (
@@ -69,14 +89,8 @@ function AddRecipeTab() {
           onChange={handleInputChange}
         />
 
-        <label className="titleAddRecipe">Image URL:</label>
-        <input
-          type="text"
-          name="image"
-          value={recipeData.image}
-          onChange={handleInputChange}
-        />
-
+        <label className="titleAddRecipe">Image:</label>
+        <input type="file" accept="image/*" onChange={handleImageUpload} />
         <label className="titleAddRecipe">Cooking Time:</label>
         <input
           type="text"

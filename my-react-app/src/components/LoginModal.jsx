@@ -18,17 +18,20 @@ function LoginModal({ closeModal, setAuthenticated }) {
       if (response.status === 200) {
         // setAuthenticated(true);
         const token = response.data.token;
-        console.log(token);
+
         localStorage.setItem("authToken", token);
 
         closeModal();
         navigate("/dashboard");
-        console.log("you are logged in!", token);
       } else {
         console.log("your credentials are not correct");
       }
     } catch (error) {
-      console.log("error during login:", error);
+      if (error.response && error.response.status === 401) {
+        console.log("Your session has expired. Please log in again."); // Handle expired token
+      } else {
+        console.log("error during login:", error);
+      }
     }
   };
   return (
