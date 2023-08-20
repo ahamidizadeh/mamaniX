@@ -1,0 +1,22 @@
+.recipe-card {
+  width: 200px;
+  height: 333px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+h2 {
+  text-decoration: underline;
+  align-self: center;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.instructions {
+  height: 200px; /* Set your desired height */
+  overflow: auto;
+  border: 1px solid #ccc; /* Add borders for visual clarity */
+  padding: 10px;
+}

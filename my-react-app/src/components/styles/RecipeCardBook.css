@@ -1,0 +1,12 @@
+.recipe-card-book-controllers {
+  color: blue;
+}
+
+.next-button {
+  float: right;
+  background-color: rgb(130, 130, 43);
+}
+.back-button {
+  float: left;
+  background-color: rgb(130, 130, 43);
+}
