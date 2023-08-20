@@ -1,17 +1,29 @@
 .dashboard {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: rgb(198, 169, 131);
 }
 
-.tab-content {
-  width: 600px;
+.profile {
+  /* Profile styles */
+  /* flex: 0 0 auto; */
   color: black;
-  position: absolute;
-  left: 40%;
-  right: 50%;
-  top: 25%;
-  bottom: 50%;
 }
-/* .profile-section {
-  position: fixed;
-  top: 0px;
-} */
+
+.middle-section {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.navigation {
+  /* Navigation styles */
+  margin-bottom: 20px; /* Add some spacing between navigation and content */
+}
+
+.content {
+  /* Content styles */
+}

@@ -1,8 +1,5 @@
 .search-input {
   width: 500px;
-  align-items: center;
-  justify-content: center;
-
   height: 50px;
   border-radius: 5px;
   text-align: center;
@@ -11,9 +8,13 @@
 }
 
 .recipe-box {
-  width: 200px;
   display: grid;
+  background-color: rgb(137, 112, 74);
+  width: fit-content;
+  height: fit-content;
+  padding: 20px;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-top: 10px;
+  border-radius: 10px;
 }
