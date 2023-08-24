@@ -13,8 +13,8 @@ const isTokenValid = () => {
 
   const decodedToken = jwtDecode(token);
   const currentTimestamp = Math.floor(Date.now() / 1000);
-  const bufferSeconds = 60;
-
+  const bufferSeconds = 600;
+  // console.log(decodedToken, currentTimestamp);
   return decodedToken.exp > currentTimestamp + bufferSeconds;
 };
 

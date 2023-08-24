@@ -1,6 +1,12 @@
+.tab-content {
+  margin-top: 35px;
+  border-radius: 10px;
+  /* background-color: rgb(137, 112, 74); */
+}
+
 .search-input {
   width: 500px;
-  height: 50px;
+  height: 40px;
   border-radius: 5px;
   text-align: center;
   color: black;
@@ -9,9 +15,9 @@
 
 .recipe-box {
   display: grid;
-  background-color: rgb(137, 112, 74);
+  background-color: inherit;
   width: fit-content;
-  height: fit-content;
+  min-height: 100vh;
   padding: 20px;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;

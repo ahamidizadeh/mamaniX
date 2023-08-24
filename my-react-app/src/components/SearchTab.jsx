@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import RecipeCard from "./RecipeCard";
+import RecipeCardBook from "./RecipeCardBook";
+import NavigationTabs from "./NavigationTabs";
 import axios from "axios"; // Import your RecipeCard component
 import "./styles/SearchTab.css"; // Import your SearchTab styles
 
@@ -8,6 +9,7 @@ function SearchTab() {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
+    console.log(NavigationTabs.props);
     console.log("fetching recipes...");
     axios.get("http://localhost:1234/api/recipes").then((response) => {
       console.log("fetching recipes:", response.data);
@@ -21,28 +23,6 @@ function SearchTab() {
     setSearchValue(event.target.value);
   };
 
-  // Dummy recipe data for demonstration
-  // const recipes = [
-  //   {
-  //     id: 1,
-  //     title: "Delicious Pasta",
-  //     image: "path-to-image",
-  //     rating: 4.5,
-  //     ingredients: ["Ingredient 1", "Ingredient 2", "Ingredient 3"],
-  //     instructions: "Cook the pasta and enjoy!",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "ghorme sabzi",
-  //     image: "path-to-image",
-  //     rating: 4.5,
-  //     ingredients: ["Ingredient 1", "Ingredient 2", "Ingredient 3"],
-  //     instructions: "Cook the pasta and enjoy!",
-  //   },
-  //   // ... other recipe objects
-  // ];
-
-  // Filter recipes based on the search input value
   const filteredRecipes = recipes.filter((recipe) =>
     recipe.title.toLowerCase().includes(searchValue.toLowerCase())
   );
@@ -58,7 +38,7 @@ function SearchTab() {
       />
       <div className="recipe-box">
         {filteredRecipes.map((recipes) => (
-          <RecipeCard key={recipes.id} recipe={recipes} />
+          <RecipeCardBook key={recipes._id} recipe={recipes} />
         ))}
       </div>
     </div>

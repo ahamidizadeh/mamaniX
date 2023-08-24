@@ -16,11 +16,12 @@ function AddRecipeTab() {
 
   const handleImageUpload = (event) => {
     const selectedImage = event.target.files[0];
-
+    console.log(selectedImage);
     setRecipeData((prevData) => ({
       ...prevData,
       image: selectedImage,
     }));
+    console.log(recipeData.image);
   };
 
   const handleInputChange = (event) => {
@@ -35,7 +36,10 @@ function AddRecipeTab() {
     formData.append("image", recipeData.image);
     formData.append("title", recipeData.title);
     formData.append("cookingTime", recipeData.cookingTime);
-    formData.append("ingridients", recipeData.ingredients);
+    recipeData.ingredients.forEach((ingredient, index) => {
+      formData.append(`ingredients[${index}][name]`, ingredient.name);
+      formData.append(`ingredients[${index}][quantity]`, ingredient.quantity);
+    });
     formData.append("instructions", recipeData.instructions);
     try {
       await api.post("/recipes", formData, {
@@ -60,10 +64,6 @@ function AddRecipeTab() {
   const handleIngredientChange = (event) => {
     const { name, value } = event.target;
     setIngredient((prev) => ({ ...prev, [name]: value }));
-
-    // console.log(ingredient);
-    // setIngredient({ name: name, quantity: value });
-    // console.log(ingredient);
   };
   const handleAddIngredient = (e) => {
     e.preventDefault();
@@ -90,7 +90,7 @@ function AddRecipeTab() {
         />
 
         <label className="titleAddRecipe">Image:</label>
-        <input type="file" accept="image/*" onChange={handleImageUpload} />
+        <input type="file" onChange={handleImageUpload} />
         <label className="titleAddRecipe">Cooking Time:</label>
         <input
           type="text"

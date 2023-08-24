@@ -2,20 +2,27 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 20px;
-  background-color: rgb(198, 169, 131);
+  /* padding: 20px; */
+  background-color: rgb(213, 190, 159);
 }
-
+.logo {
+  /* background-color: white; */
+  border-radius: 10px;
+}
 .profile {
-  /* Profile styles */
-  /* flex: 0 0 auto; */
+  position: absolute;
+  margin-left: 100px;
+  margin-top: 50px;
   color: black;
 }
 
 .middle-section {
+  padding: 10px;
+  min-height: 100vh;
+  background-color: rgba(186, 156, 113, 0.776);
+  margin-left: 500px;
   display: block;
   text-align: center;
-  margin: 0 auto;
   width: fit-content;
 }
 
@@ -23,7 +30,7 @@
   /* Navigation styles */
   margin-bottom: 20px; /* Add some spacing between navigation and content */
 }
-
-.content {
-  /* Content styles */
+.tab-link {
+  /* position: absolute; */
+  display: flex;
 }

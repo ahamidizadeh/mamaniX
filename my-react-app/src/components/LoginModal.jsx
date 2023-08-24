@@ -4,7 +4,7 @@ import axios from "axios";
 import api from "../utils/api";
 import "./styles/LoginModal.css";
 
-function LoginModal({ closeModal, setAuthenticated }) {
+function LoginModal({ closeModal, isAuthenticated, setIsAuthenticated }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -16,13 +16,14 @@ function LoginModal({ closeModal, setAuthenticated }) {
       const response = await api.post("/login", userData);
 
       if (response.status === 200) {
-        // setAuthenticated(true);
+        setIsAuthenticated(true);
+        console.log(isAuthenticated);
         const token = response.data.token;
 
         localStorage.setItem("authToken", token);
 
         closeModal();
-        navigate("/dashboard");
+        navigate("/dashboard/search");
       } else {
         console.log("your credentials are not correct");
       }

@@ -2,10 +2,13 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../db/models/user");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const router = express.Router();
-const JWT_SECRET = process.env.JWT_SECRET;
-
+const {
+  verifyRefreshToken,
+  generateAccessToken,
+} = require("../middleware/auth");
+const { JWT_SECRET, JWT_REFRESH_SECRET } = process.env;
+require("dotenv").config();
 router.post("/register", async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -44,10 +47,31 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
       expiresIn: "1h",
     });
+    const refreshToken = jwt.sign({ userId: user._id }, JWT_REFRESH_SECRET, {
+      expiresIn: "7d",
+    });
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+    });
+
     res.status(200).json({ message: "Login successful", token });
   } catch (err) {
     res.status(500).json({ message: "Internal server error" });
   }
 });
+router.post("/refresh-token", async (req, res) => {
+  const { refreshToken } = req.body;
 
+  try {
+    const decoded = await verifyRefreshToken(refreshToken);
+
+    const accessToken = generateAccessToken({ userId: decoded.userId });
+
+    res.json({ accessToken });
+  } catch (error) {
+    console.log("error refreshing access token", error);
+    res.status(401).json({ error: "Unauthorized" });
+  }
+});
 module.exports = router;

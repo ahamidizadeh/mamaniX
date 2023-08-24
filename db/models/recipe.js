@@ -6,27 +6,23 @@ const recipeSchema = new mongoose.Schema({
     required: true,
   },
 
-  image: {
-    type: String,
-    required: true,
-  },
+  image: String,
+
   cookingTime: {
     type: String,
     required: true,
   },
-  ingredients: [
-    {
-      name: String,
-      quantity: String,
-    },
-  ],
+  ingredients: {
+    type: [mongoose.Schema.Types.Mixed],
+    default: [],
+  },
   instructions: {
     type: String,
     required: true,
   },
   contributor: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // Reference to the User model
+    ref: "User",
   },
   rating: {
     type: Number,

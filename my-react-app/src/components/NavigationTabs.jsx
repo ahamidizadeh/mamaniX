@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./styles/NavigationTabs.css"; // Import your CSS file
 
-function NavigationTabs({ setActiveTab }) {
+function NavigationTabs({ setActiveTab, activeTab }) {
+  useEffect(() => {
+    console.log("you are in the navigation tabs");
+    setActiveTab("search");
+    console.log(activeTab);
+  }, [setActiveTab]);
   return (
     <div className="navigation-tabs">
       <NavLink

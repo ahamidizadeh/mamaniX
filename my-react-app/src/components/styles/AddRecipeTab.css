@@ -1,6 +1,11 @@
 form {
+  margin-top: 25px;
   display: grid;
+  justify-content: center;
   gap: 10px;
+}
+.recipeHeader {
+  margin-top: 150px;
 }
 input {
   max-width: 200px;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import ProfileSection from "./ProfileSection";
 import NavigationTabs from "./NavigationTabs";
 import SearchTab from "./SearchTab";
@@ -7,24 +7,45 @@ import ShoppingListTab from "./ShoppingListTab";
 import AddRecipeTab from "./AddRecipeTab";
 import FavoritesTab from "./FavoritesTab";
 import PreviouslyTriedTab from "./PreviouslyTriedTab";
+import logoImage from "../../public/images/mamanilogo5.svg";
 import "./styles/Dashboard.css";
 
 function Dashboard() {
-  const [activeTab, setActiveTab] = useState("search");
+  const [activeTab, setActiveTab] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    console.log("loggingout");
+    navigate("/");
+  };
 
   return (
     <div className="dashboard">
-      <ProfileSection />
-      <div className="content">
-        <NavigationTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-
-        <Routes>
-          <Route path="/search" element={<SearchTab />} />
-          <Route path="/add-recipe" element={<AddRecipeTab />} />
-          <Route path="/favorites" element={<FavoritesTab />} />
-          <Route path="/previously-tried" element={<PreviouslyTriedTab />} />
-          <Route path="/shopping-list" element={<ShoppingListTab />} />
-        </Routes>
+      <aside className="profile">
+        <ProfileSection />
+        <button onClick={handleLogout}>Logout</button>
+      </aside>
+      <div className="middle-section">
+        {/* <div className="logo">
+          <img
+            src={logoImage}
+            alt="mamanilogo"
+            style={{ width: "200px", height: "200px" }}
+          ></img>
+        </div> */}
+        <div className="navigation">
+          <NavigationTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        </div>
+        <div className="content">
+          <Routes>
+            <Route path="/search" element={<SearchTab />} />
+            <Route path="/add-recipe" element={<AddRecipeTab />} />
+            <Route path="/favorites" element={<FavoritesTab />} />
+            <Route path="/previously-tried" element={<PreviouslyTriedTab />} />
+            <Route path="/shopping-list" element={<ShoppingListTab />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
 .recipe-card {
+  display: block;
   width: 200px;
   height: 333px;
-  background-color: #ffffff;
+  background-color: beige;
   border-radius: 10px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
+
   flex-direction: column;
   overflow: hidden;
 }
@@ -15,8 +16,24 @@ h2 {
 }
 
 .instructions {
-  height: 200px; /* Set your desired height */
+  margin-top: 0px;
+
+  color: black;
+  height: 175px; /* Set your desired height */
   overflow: auto;
   border: 1px solid #ccc; /* Add borders for visual clarity */
   padding: 10px;
+}
+.recipe-card-book-controls-page3 {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+.page3-ingredients-button {
+  line-height: 10px;
+  height: 30px;
+  display: absolute;
+
+  margin-bottom: 5px;
 }
