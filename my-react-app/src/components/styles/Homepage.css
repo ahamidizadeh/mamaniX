@@ -1,0 +1,27 @@
+.homepage {
+  display: flex;
+  justify-content: space-between;
+}
+.homepage-intro {
+  position: relative;
+  height: 100vh;
+}
+.homepage-intro > h1 {
+  margin-left: 25px;
+  margin-top: 50%;
+  color: black;
+}
+.homepage-buttons {
+  width: 50%;
+  background-color: black;
+  margin-left: 200px;
+}
+
+.homepage-buttons > p {
+  font-size: larger;
+  margin-left: 20px;
+  margin-top: 75%;
+}
+.homepage-buttons > button {
+  margin-left: 50px;
+}

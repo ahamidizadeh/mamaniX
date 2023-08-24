@@ -3,21 +3,22 @@ import Modal from "react-modal";
 import { useAuth } from "../utils/AuthContext";
 import RegisterModal from "./RegisterModal";
 import LoginModal from "./LoginModal";
+import "./styles/HomePage.css";
 
 function HomePage() {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const { isAuthenticated, setIsAuthenticated } = useAuth();
-
-  console.log(isAuthenticated);
   return (
     <div className="homepage">
-      <h1>MamaniX welcomes you!</h1>
-      <p>Get started by registering or logging in :</p>
-
-      <button onClick={() => setShowRegisterModal(true)}>Register</button>
-      <button onClick={() => setShowLoginModal(true)}>Login</button>
-
+      <div className="homepage-intro">
+        <h1>Welcome to Mamani's kitchen!</h1>
+      </div>
+      <div className="homepage-buttons">
+        <p>Get started by registering or logging in :</p>
+        <button onClick={() => setShowRegisterModal(true)}>Register</button>
+        <button onClick={() => setShowLoginModal(true)}>Login</button>
+      </div>
       <Modal
         isOpen={showRegisterModal}
         onRequestClose={() => setShowRegisterModal(false)}
@@ -39,12 +40,4 @@ function HomePage() {
   );
 }
 
-// const useAuth = () => {
-//   const context = useContext(AuthContext);
-//   if (!context) {
-//     throw new Error("useAuth must be used withing an AuthContext.provider");
-//   }
-
-//   return context;
-// };
 export { HomePage };
