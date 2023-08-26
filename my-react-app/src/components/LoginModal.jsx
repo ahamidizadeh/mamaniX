@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import api from "../utils/api";
 import "./styles/LoginModal.css";
 
@@ -16,6 +15,7 @@ function LoginModal({ closeModal, isAuthenticated, setIsAuthenticated }) {
       const response = await api.post("/login", userData);
 
       if (response.status === 200) {
+        localStorage.setItem("isAuthenticated", true);
         setIsAuthenticated(true);
         console.log(isAuthenticated);
         const token = response.data.token;

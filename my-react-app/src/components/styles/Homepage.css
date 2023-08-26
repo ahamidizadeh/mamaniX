@@ -9,19 +9,22 @@
 .homepage-intro > h1 {
   margin-left: 25px;
   margin-top: 50%;
-  color: black;
+  color: rgb(128, 81, 40);
 }
 .homepage-buttons {
   width: 50%;
   background-color: black;
-  margin-left: 200px;
+  /* margin-left: 200px; */
+}
+.homepage-buttons > h1 {
+  color: white;
+  text-decoration: solid;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 250px;
 }
 
-.homepage-buttons > p {
-  font-size: larger;
-  margin-left: 20px;
-  margin-top: 75%;
-}
 .homepage-buttons > button {
+  margin-top: 10px;
   margin-left: 50px;
 }

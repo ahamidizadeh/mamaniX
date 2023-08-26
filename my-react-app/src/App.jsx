@@ -9,7 +9,7 @@ import "./App.css";
 function App() {
   // const { isAuthenticated, setIsAuthenticated } = useAuth();
   // // console.log("homepage:", isAuthenticated);
-
+  // const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
   return (
     <AuthProvider>
       <Router>
@@ -23,8 +23,8 @@ function App() {
 }
 
 function PrivateRoute({ element }) {
-  const { isAuthenticated } = useAuth();
-  console.log(isAuthenticated);
+  // const { isAuthenticated } = useAuth();
+  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
   return isAuthenticated ? <Dashboard /> : <HomePage />;
 }
 

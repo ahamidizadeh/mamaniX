@@ -1,27 +1,58 @@
-form {
-  margin-top: 25px;
+/* .tab-content {
   display: grid;
-  justify-content: center;
-  gap: 10px;
+} */
+.form-inline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
 }
-.recipeHeader {
-  margin-top: 150px;
+.form-inline label {
+  margin: 5px 10px 5px 0;
 }
-input {
-  max-width: 200px;
-}
-.buttonAddRecipe,
-.buttonAddIngredient {
-  justify-content: center;
-  width: 250px;
-  transition: background-color 0.3s ease;
-}
-.buttonAddRecipe:hover,
-.buttonAddIngredient:hover {
-  background-color: rgb(27, 110, 69);
+.form-inline input {
+  color: black;
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: rgb(235, 219, 208);
+  border: 1px solid #ddd;
 }
 
-.instructionsAddRecipe {
-  height: 250px;
-  width: 250px;
+.form-inline button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: rgb(73, 61, 47);
+  border: 1px solid rgb(10, 10, 9);
+  cursor: pointer;
+}
+
+.delete-ingredient {
+  margin-left: 25px;
+  max-height: 5px;
+  max-width: 5px;
+  line-height: 5px;
+  font-size: 0.8em;
+  border-radius: 70px;
+}
+.delete-ingredient:hover {
+  background-color: rgb(244, 61, 61);
+}
+.main-button:hover {
+  border: 1px solid rgb(112, 54, 108);
+  background-color: blueviolet;
+}
+.form-inline textarea {
+  color: rgb(117, 128, 36);
+  background-color: rgb(235, 219, 208);
+}
+
+@media (max-width: 2000px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+
+  .form-inline {
+    flex-direction: column;
+    /* align-items: stretch; */
+  }
 }

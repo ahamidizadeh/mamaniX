@@ -8,6 +8,7 @@ function AddRecipeTab() {
   const [ingredient, setIngredient] = useState({ name: "", quantity: "" });
   const [recipeData, setRecipeData] = useState({
     title: "",
+    typeOfFood: "",
     image: null,
     cookingTime: "",
     ingredients: [],
@@ -34,6 +35,7 @@ function AddRecipeTab() {
 
     const formData = new FormData();
     formData.append("image", recipeData.image);
+    formData.append("typeOfFood", recipeData.typeOfFood);
     formData.append("title", recipeData.title);
     formData.append("cookingTime", recipeData.cookingTime);
     recipeData.ingredients.forEach((ingredient, index) => {
@@ -51,6 +53,7 @@ function AddRecipeTab() {
       // Clear form fields
       setRecipeData({
         title: "",
+        typeOfFood: "",
         image: null,
         cookingTime: "",
         ingredients: [],
@@ -76,36 +79,66 @@ function AddRecipeTab() {
     }
     setIngredient({ name: "", quantity: "" });
   };
-
+  const handleDeleteIngredient = (indexToDelete) => {
+    console.log("deleting");
+    const updatedIngredients = recipeData.ingredients.filter(
+      (item, index) => index !== indexToDelete
+    );
+    setRecipeData((prevData) => ({
+      ...prevData,
+      ingredients: updatedIngredients,
+    }));
+  };
   return (
     <div className="tab-content">
       <h2 className="recipeHeader">Add Recipe</h2>
-      <form onSubmit={handleSubmit}>
-        <label className="titleAddRecipe">Title:</label>
+      <form className="form-inline" onSubmit={handleSubmit}>
+        <label>Title:</label>
         <input
           type="text"
           name="title"
           value={recipeData.title}
           onChange={handleInputChange}
         />
+        <label>Food Category:</label>
+        <select
+          onChange={handleInputChange}
+          value={recipeData.typeOfFood}
+          name="typeOfFood"
+        >
+          <option> Main dish</option>
+          <option> Desert</option>
+          <option> Breakfast</option>
+          <option> Shake</option>
+          <option> Appetizer</option>
+          <option> Drink</option>
+        </select>
 
-        <label className="titleAddRecipe">Image:</label>
+        <label>Image:</label>
         <input type="file" onChange={handleImageUpload} />
-        <label className="titleAddRecipe">Cooking Time:</label>
+        <label>Cooking Time:</label>
         <input
           type="text"
           name="cookingTime"
           value={recipeData.cookingTime}
           onChange={handleInputChange}
         />
-        <label className="titleAddRecipe">Ingredients:</label>
+        <label>Ingredients:</label>
 
-        <div className="ingridentsAddRecipe">
-          <ul className="ingredientList">
+        <div className="listOfIngredients">
+          <ul>
             {recipeData.ingredients.map((ingredient, index) => (
-              <li key={index}>
-                {ingredient.name} - {ingredient.quantity}
-              </li>
+              <div className="ingredient">
+                <li key={index}>
+                  {ingredient.name} - {ingredient.quantity}
+                  <button
+                    className="delete-ingredient"
+                    onClick={() => handleDeleteIngredient(index)}
+                  >
+                    x
+                  </button>
+                </li>
+              </div>
             ))}
           </ul>
           <input
@@ -125,13 +158,13 @@ function AddRecipeTab() {
         </div>
         <button
           type="button"
-          className="buttonAddIngredient"
+          className="main-button"
           onClick={handleAddIngredient}
         >
           Add Ingredient
         </button>
 
-        <label className="titleAddRecipe">Instructions:</label>
+        <label>Instructions:</label>
         <textarea
           className="instructionsAddRecipe"
           name="instructions"
@@ -139,11 +172,7 @@ function AddRecipeTab() {
           onChange={handleInputChange}
         />
 
-        <button
-          type="button"
-          className="buttonAddRecipe"
-          onClick={handleSubmit}
-        >
+        <button type="button" className="main-button" onClick={handleSubmit}>
           Add Recipe
         </button>
       </form>

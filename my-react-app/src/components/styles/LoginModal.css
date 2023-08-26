@@ -31,3 +31,12 @@
 
   margin-top: 20px;
 }
+.ReactModal__Content {
+  background-color: green;
+}
+.ReactModal__Content--after-open {
+  color: green;
+}
+.ReactModalPortal {
+  background-color: green;
+}

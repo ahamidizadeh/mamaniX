@@ -15,13 +15,21 @@ function HomePage() {
         <h1>Welcome to Mamani's kitchen!</h1>
       </div>
       <div className="homepage-buttons">
-        <p>Get started by registering or logging in :</p>
+        <h1>Get Started</h1>
         <button onClick={() => setShowRegisterModal(true)}>Register</button>
         <button onClick={() => setShowLoginModal(true)}>Login</button>
       </div>
       <Modal
         isOpen={showRegisterModal}
         onRequestClose={() => setShowRegisterModal(false)}
+        style={{
+          overlay: {
+            backgroundColor: "black",
+          },
+          content: {
+            backgroundColor: "pink",
+          },
+        }}
       >
         <RegisterModal closeModal={() => setShowRegisterModal(false)} />
       </Modal>
@@ -29,6 +37,14 @@ function HomePage() {
       <Modal
         isOpen={showLoginModal}
         onRequestClose={() => setShowLoginModal(false)}
+        style={{
+          overlay: {
+            backgroundColor: "black",
+          },
+          content: {
+            backgroundColor: "black",
+          },
+        }}
       >
         <LoginModal
           closeModal={() => setShowLoginModal(false)}

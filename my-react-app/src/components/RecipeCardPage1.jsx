@@ -9,6 +9,7 @@ const RecipeCardPage1 = ({ recipe, currentPage, nextPage, prevPage }) => {
       <h3 className="recipe-title">{recipe.title}</h3>
       <h4 className="recipe-contributor">{`${recipe.contributor.username}`}</h4>
       <h4 className="recipe-cookingTime">{`${recipe.cookingTime}`}</h4>
+      <h4 className="recipe-typeOfFood">{`${recipe.typeOfFood}`}</h4>
       <h4 className="recipe-rating">Rating: {recipe.rating}</h4>
       <div className="recipe-card-book-controls">
         {currentPage > 1 && (
