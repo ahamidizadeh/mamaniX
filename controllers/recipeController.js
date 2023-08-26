@@ -19,14 +19,15 @@ router.post(
   authenticateMiddleware,
   upload.single("image"),
   async (req, res) => {
-    const { title, cookingTime, ingredients, instructions } = req.body;
+    const { title, cookingTime, ingredients, instructions, typeOfFood } =
+      req.body;
     const contributor = req.user.id;
     const image = req.file ? "/images/" + req.file.filename : "";
     try {
-      // Create a new recipe document in the database
       const newRecipe = new Recipe({
         title,
         image,
+        typeOfFood,
         contributor,
         cookingTime,
         ingredients,

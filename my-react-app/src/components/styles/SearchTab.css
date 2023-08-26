@@ -24,3 +24,16 @@
   margin-top: 10px;
   border-radius: 10px;
 }
+.filter-buttons {
+  margin-top: 10px;
+  justify-content: space-between;
+}
+.filter-button-small {
+  margin: 5px;
+  color: white;
+  background-color: rgb(38, 38, 56);
+  transition: background-color 0.6s ease;
+}
+.filter-button-small:hover {
+  background-color: rgb(117, 121, 33);
+}

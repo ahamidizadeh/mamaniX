@@ -4,7 +4,6 @@ import "./styles/NavigationTabs.css"; // Import your CSS file
 
 function NavigationTabs({ setActiveTab, activeTab }) {
   useEffect(() => {
-    console.log("you are in the navigation tabs");
     setActiveTab("search");
     console.log(activeTab);
   }, [setActiveTab]);

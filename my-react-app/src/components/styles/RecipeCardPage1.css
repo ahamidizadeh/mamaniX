@@ -4,6 +4,7 @@ h3 {
   text-align: center;
 }
 h4 {
+  margin: none;
   color: black;
 }
 .recipe-card {
@@ -24,20 +25,21 @@ h4 {
 }
 .recipe-image {
   width: 100%;
-  height: 35%;
+  height: 33%;
   object-fit: cover;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
 .recipe-title {
+  margin-top: 2px;
   align-items: center;
   font-size: 20px;
   font-weight: bold;
 }
 
 .recipe-rating {
-  position: absolute;
+  margin-top: -7px;
   bottom: 20px;
   left: 50px;
   margin-left: 15px;
@@ -45,14 +47,20 @@ h4 {
   font-size: 14px;
 }
 .recipe-contributor {
+  margin-top: -10px;
   color: black;
   margin-left: 5px;
 }
 .recipe-cookingTime {
+  margin-top: -5px;
   color: black;
   /* position: absolute; */
 
   margin-left: 5px;
+}
+.recipe-typeOfFood {
+  margin-top: -5px;
+  margin-left: 15px;
 }
 .recipe-card-book-controls {
   position: absolute;

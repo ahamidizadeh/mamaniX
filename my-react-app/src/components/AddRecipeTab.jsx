@@ -8,21 +8,27 @@ function AddRecipeTab() {
   const [ingredient, setIngredient] = useState({ name: "", quantity: "" });
   const [recipeData, setRecipeData] = useState({
     title: "",
-    typeOfFood: "",
+    typeOfFood: "defaultOption",
     image: null,
     cookingTime: "",
     ingredients: [],
     instructions: "",
   });
+  const handleTypeOfFoodChange = (event) => {
+    const { name, value } = event.target;
 
+    setRecipeData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
   const handleImageUpload = (event) => {
     const selectedImage = event.target.files[0];
-    console.log(selectedImage);
+
     setRecipeData((prevData) => ({
       ...prevData,
       image: selectedImage,
     }));
-    console.log(recipeData.image);
   };
 
   const handleInputChange = (event) => {
@@ -53,7 +59,7 @@ function AddRecipeTab() {
       // Clear form fields
       setRecipeData({
         title: "",
-        typeOfFood: "",
+        typeOfFood: "default value",
         image: null,
         cookingTime: "",
         ingredients: [],
@@ -102,16 +108,19 @@ function AddRecipeTab() {
         />
         <label>Food Category:</label>
         <select
-          onChange={handleInputChange}
+          onChange={handleTypeOfFoodChange}
           value={recipeData.typeOfFood}
           name="typeOfFood"
         >
-          <option> Main dish</option>
-          <option> Desert</option>
-          <option> Breakfast</option>
-          <option> Shake</option>
-          <option> Appetizer</option>
-          <option> Drink</option>
+          <option value="defaultOption" disabled>
+            Select Food Type
+          </option>
+          <option value="Main dish"> Main dish</option>
+          <option value="Desert"> Desert</option>
+          <option value="Breakfast"> Breakfast</option>
+          <option value="Shake"> Shake</option>
+          <option value="Appetizer"> Appetizer</option>
+          <option value="Drink"> Drink</option>
         </select>
 
         <label>Image:</label>

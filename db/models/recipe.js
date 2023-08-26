@@ -12,6 +12,10 @@ const recipeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  typeOfFood: {
+    type: String,
+    required: true,
+  },
   ingredients: {
     type: [mongoose.Schema.Types.Mixed],
     default: [],
