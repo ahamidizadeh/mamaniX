@@ -4,11 +4,12 @@ import "./styles/RecipeCardPage1.css"; // Import your CSS file for styling
 const RecipeCardPage1 = ({ recipe, currentPage, nextPage, prevPage }) => {
   const imageSrc = `http://localhost:1234/${recipe.image}`;
   return (
-    <div className="recipe-card">
+    <div className="recipe-card-page1">
       <img src={imageSrc} alt={recipe.title} className="recipe-image" />
       <h3 className="recipe-title">{recipe.title}</h3>
       <h4 className="recipe-contributor">{`${recipe.contributor.username}`}</h4>
       <h4 className="recipe-cookingTime">{`${recipe.cookingTime}`}</h4>
+      <h4> {`serves: ${recipe.servingSize}`}</h4>
       <h4 className="recipe-typeOfFood">{`${recipe.typeOfFood}`}</h4>
       <h4 className="recipe-rating">Rating: {recipe.rating}</h4>
       <div className="recipe-card-book-controls">

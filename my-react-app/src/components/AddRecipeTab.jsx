@@ -1,19 +1,34 @@
-import React, { useState } from "react";
-// import axios from "axios";
+import React, { useState, useEffect } from "react";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import "./styles/AddRecipeTab.css";
 import api from "../utils/api";
 
 function AddRecipeTab() {
-  const [ingredient, setIngredient] = useState({ name: "", quantity: "" });
+  const [ingredient, setIngredient] = useState({
+    name: "",
+    quantity: "",
+    measurement: "defaultOption",
+  });
   const [recipeData, setRecipeData] = useState({
     title: "",
     typeOfFood: "defaultOption",
     image: null,
+    servingSize: 1,
     cookingTime: "",
     ingredients: [],
     instructions: "",
   });
+
+  useEffect(() => {
+    const authToken = localStorage.getItem("authToken");
+    if (!authToken) {
+      console.log("authtoken has expired");
+    } else {
+      console.log(authToken);
+    }
+  }, []);
+
   const handleTypeOfFoodChange = (event) => {
     const { name, value } = event.target;
 
@@ -43,16 +58,22 @@ function AddRecipeTab() {
     formData.append("image", recipeData.image);
     formData.append("typeOfFood", recipeData.typeOfFood);
     formData.append("title", recipeData.title);
+    formData.append("servingSize", recipeData.servingSize);
     formData.append("cookingTime", recipeData.cookingTime);
     recipeData.ingredients.forEach((ingredient, index) => {
       formData.append(`ingredients[${index}][name]`, ingredient.name);
       formData.append(`ingredients[${index}][quantity]`, ingredient.quantity);
+      formData.append(
+        `ingredients[${index}][measurement]`,
+        ingredient.measurement
+      );
     });
     formData.append("instructions", recipeData.instructions);
     try {
       await api.post("/recipes", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
       });
 
@@ -61,6 +82,7 @@ function AddRecipeTab() {
         title: "",
         typeOfFood: "default value",
         image: null,
+        servingSize: 1,
         cookingTime: "",
         ingredients: [],
         instructions: "",
@@ -76,14 +98,14 @@ function AddRecipeTab() {
   };
   const handleAddIngredient = (e) => {
     e.preventDefault();
-    if (ingredient.name && ingredient.quantity) {
+    if (ingredient.name && ingredient.quantity && ingredient.measurement) {
       const newIngredient = { ...ingredient };
       setRecipeData((prevData) => ({
         ...prevData,
         ingredients: [...prevData.ingredients, newIngredient],
       }));
     }
-    setIngredient({ name: "", quantity: "" });
+    setIngredient({ name: "", quantity: "", measurement: "defaultOption" });
   };
   const handleDeleteIngredient = (indexToDelete) => {
     console.log("deleting");
@@ -125,6 +147,14 @@ function AddRecipeTab() {
 
         <label>Image:</label>
         <input type="file" onChange={handleImageUpload} />
+        <label>Serving Size(roundup):</label>
+        <input
+          type="number"
+          min="1"
+          name="servingSize"
+          value={recipeData.servingSize}
+          onChange={handleInputChange}
+        ></input>
         <label>Cooking Time:</label>
         <input
           type="text"
@@ -135,21 +165,26 @@ function AddRecipeTab() {
         <label>Ingredients:</label>
 
         <div className="listOfIngredients">
-          <ul>
-            {recipeData.ingredients.map((ingredient, index) => (
-              <div className="ingredient">
-                <li key={index}>
-                  {ingredient.name} - {ingredient.quantity}
-                  <button
-                    className="delete-ingredient"
-                    onClick={() => handleDeleteIngredient(index)}
-                  >
-                    x
-                  </button>
-                </li>
-              </div>
-            ))}
-          </ul>
+          {recipeData.ingredients.map((ingredient, i) => (
+            <div className="ingredient-list">
+              <li key={i}>
+                {ingredient.name} : {ingredient.quantity} {"  "}
+                {ingredient.measurement}
+                <HighlightOffIcon
+                  onClick={() => handleDeleteIngredient(i)}
+                  style={{
+                    fontSize: "16px",
+                    color: "#803d06",
+                    cursor: "pointer",
+                    marginLeft: "15px",
+                    marginTop: "5px",
+                  }}
+                />
+              </li>
+            </div>
+          ))}
+
+          {/* <div className="ingredient-inputs"> */}
           <input
             type="text"
             name="name"
@@ -158,12 +193,31 @@ function AddRecipeTab() {
             onChange={handleIngredientChange}
           />
           <input
-            type="text"
+            type="number"
             name="quantity"
             placeholder="Quantity"
             value={ingredient.quantity}
             onChange={handleIngredientChange}
           />
+          <select
+            className="measurements"
+            name="measurement"
+            onChange={handleIngredientChange}
+            value={ingredient.measurement}
+          >
+            <option value="defaultOption" disabled>
+              measurements
+            </option>
+            <option value="grams">grams</option>
+            <option value="lbs">lbs</option>
+            <option value="cups">cup/cups</option>
+            <option value="liter">Liter</option>
+            <option value="units">units</option>
+            <option value="table spoon">table spoon</option>
+            <option value="tea spoon">tea spoon</option>
+            <option value="to your liking">to your liking</option>
+          </select>
+          {/* </div> */}
         </div>
         <button
           type="button"

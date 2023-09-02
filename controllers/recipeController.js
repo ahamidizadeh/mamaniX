@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Recipe = require("../db/models/recipe"); // Import your Recipe model
-const authenticateMiddleware = require("../middleware/authMiddleware");
+const authenticateMiddleware = require("./middleware/authMiddleware");
 const multer = require("multer");
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "public/images");
@@ -19,16 +18,24 @@ router.post(
   authenticateMiddleware,
   upload.single("image"),
   async (req, res) => {
-    const { title, cookingTime, ingredients, instructions, typeOfFood } =
-      req.body;
+    const {
+      title,
+      servingSize,
+      cookingTime,
+      ingredients,
+      instructions,
+      typeOfFood,
+    } = req.body;
     const contributor = req.user.id;
     const image = req.file ? "/images/" + req.file.filename : "";
+
     try {
       const newRecipe = new Recipe({
         title,
         image,
         typeOfFood,
         contributor,
+        servingSize,
         cookingTime,
         ingredients,
         instructions,
@@ -44,7 +51,7 @@ router.post(
   }
 );
 
-router.get("/", async (req, res) => {
+router.get("/", authenticateMiddleware, async (req, res) => {
   try {
     const recipes = await Recipe.find().populate("contributor", "username");
     res.json(recipes);

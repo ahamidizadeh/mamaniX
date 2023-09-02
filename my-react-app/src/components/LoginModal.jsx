@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../utils/api";
 import "./styles/LoginModal.css";
 
-function LoginModal({ closeModal, isAuthenticated, setIsAuthenticated }) {
+function LoginModal({ closeModal, setIsAuthenticated }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -14,13 +14,12 @@ function LoginModal({ closeModal, isAuthenticated, setIsAuthenticated }) {
     try {
       const response = await api.post("/login", userData);
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         localStorage.setItem("isAuthenticated", true);
         setIsAuthenticated(true);
-        console.log(isAuthenticated);
-        const token = response.data.token;
+        const authToken = response.data.authToken;
 
-        localStorage.setItem("authToken", token);
+        localStorage.setItem("authToken", authToken);
 
         closeModal();
         navigate("/dashboard/search");

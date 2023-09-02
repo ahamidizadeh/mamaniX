@@ -7,19 +7,19 @@ h4 {
   margin: none;
   color: black;
 }
-.recipe-card {
+.recipe-card-page1 {
   position: relative;
   width: 200px;
-  height: 333px;
-  background-color: beige;
+  height: 375px;
+  background-color: #8d5c90;
   border-radius: 10px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, transform 0.5s;
+  box-shadow: 0px 2px 6px rgba(15, 14, 14, 0.1);
+  transition: background-color 0.5s, transform 0.5s;
   flex-direction: column;
   overflow: hidden;
 }
 .recipe-card:hover {
-  background-color: lightgoldenrodyellow;
+  background-color: rgb(124, 124, 9);
   transform: scale(1.02);
   cursor: pointer;
 }
@@ -40,7 +40,7 @@ h4 {
 
 .recipe-rating {
   margin-top: -7px;
-  bottom: 20px;
+  margin-bottom: 10px;
   left: 50px;
   margin-left: 15px;
   color: black;
@@ -54,8 +54,6 @@ h4 {
 .recipe-cookingTime {
   margin-top: -5px;
   color: black;
-  /* position: absolute; */
-
   margin-left: 5px;
 }
 .recipe-typeOfFood {

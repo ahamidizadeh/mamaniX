@@ -23,8 +23,9 @@ function App() {
 }
 
 function PrivateRoute({ element }) {
+  // const isAuthenticated = true;
   // const { isAuthenticated } = useAuth();
-  const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+  const isAuthenticated = localStorage.getItem("isAuthenticated");
   return isAuthenticated ? <Dashboard /> : <HomePage />;
 }
 

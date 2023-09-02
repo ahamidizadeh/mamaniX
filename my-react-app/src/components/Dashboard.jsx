@@ -7,7 +7,7 @@ import ShoppingListTab from "./ShoppingListTab";
 import AddRecipeTab from "./AddRecipeTab";
 import FavoritesTab from "./FavoritesTab";
 import PreviouslyTriedTab from "./PreviouslyTriedTab";
-import logoImage from "../../public/images/mamanilogo5.svg";
+
 import "./styles/Dashboard.css";
 
 function Dashboard() {
@@ -24,7 +24,9 @@ function Dashboard() {
     <div className="dashboard">
       <aside className="profile">
         <ProfileSection />
-        <button onClick={handleLogout}>Logout</button>
+        <button className="logout" onClick={handleLogout}>
+          Logout
+        </button>
       </aside>
       <div className="middle-section">
         {/* <div className="logo">

@@ -6,9 +6,13 @@ const router = express.Router();
 const {
   verifyRefreshToken,
   generateAccessToken,
-} = require("../middleware/auth");
+  generateRefreshToken,
+  verifyAccessToken,
+} = require("./middleware/auth");
+
 const { JWT_SECRET, JWT_REFRESH_SECRET } = process.env;
 require("dotenv").config();
+
 router.post("/register", async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -44,31 +48,36 @@ router.post("/login", async (req, res) => {
     if (!passwordMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
-      expiresIn: "1h",
-    });
-    const refreshToken = jwt.sign({ userId: user._id }, JWT_REFRESH_SECRET, {
-      expiresIn: "7d",
-    });
+
+    const authToken = generateAccessToken({ userId: user._id });
+    console.log("A", authToken);
+    const refreshToken = generateRefreshToken({ userId: user._id });
+    console.log("R", refreshToken);
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.status(200).json({ message: "Login successful", token });
+    res.status(200).json({ message: "Login successful", authToken });
   } catch (err) {
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: err.message });
   }
 });
+
 router.post("/refresh-token", async (req, res) => {
-  const { refreshToken } = req.body;
+  console.log("trying to refresh token");
 
   try {
+    const refreshToken = req.cookies.refreshToken;
+    console.log("this is the refresh Token in server :", refreshToken);
+    if (!refreshToken) {
+      return res.status(401).json({ message: "refresh token missing" });
+    }
     const decoded = await verifyRefreshToken(refreshToken);
 
-    const accessToken = generateAccessToken({ userId: decoded.userId });
+    const authToken = generateAccessToken({ userId: decoded.userId });
 
-    res.json({ accessToken });
+    res.json({ authToken });
   } catch (error) {
     console.log("error refreshing access token", error);
     res.status(401).json({ error: "Unauthorized" });

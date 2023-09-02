@@ -1,13 +1,19 @@
-.recipe-card {
+.recipe-card-page2 {
   position: relative;
+  display: flex;
   width: 200px;
-  height: 333px;
-  background-color: beige;
+  height: 375px;
+  background-color: #8d5c90;
   border-radius: 10px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+.ingredients-page2-box {
+  text-align: left;
+  margin-left: 2px;
+  display: block;
 }
 
 h2 {
@@ -19,13 +25,11 @@ li {
   color: black;
   list-style: none;
 }
-.ingredients {
-  margin-left: 5px;
+.ingredients-page2 {
+  background-color: rgb(100, 62, 136);
+
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  overflow: auto;
-  border: 1px #ccc; /* Add borders for visual clarity */
-  padding: 10px;
 }
 .recipe-card-book-controls-page2 {
   position: absolute;
@@ -47,3 +51,8 @@ li {
 /* .prev-button {
   margin-right: 30px;
 } */
+.ingredients-page2 {
+  background-color: rgb(100, 62, 136);
+  display: block;
+  border: white;
+}

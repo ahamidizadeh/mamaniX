@@ -34,3 +34,9 @@
   /* position: absolute; */
   display: flex;
 }
+.logout {
+  transition: background-color 3s ease;
+}
+.logout:hover {
+  background-color: rgb(147, 34, 34);
+}
