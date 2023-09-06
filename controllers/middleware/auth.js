@@ -37,7 +37,7 @@ const generateAccessToken = (payload) => {
 };
 
 const generateRefreshToken = (payload) => {
-  return jwt.sign(payload, JWT_REFRESH_SECRET, { expiresIn: "10m" });
+  return jwt.sign(payload, JWT_REFRESH_SECRET, { expiresIn: "20h" });
 };
 
 module.exports = {

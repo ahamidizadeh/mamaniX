@@ -3,7 +3,7 @@ import RecipeCardBook from "./RecipeCardBook";
 import NavigationTabs from "./NavigationTabs";
 import "./styles/SearchTab.css";
 import api from "../utils/api";
-function SearchTab() {
+function SearchTab({ favRecipes, setFavRecipes }) {
   const [searchValue, setSearchValue] = useState("");
   const [foodTypes, setFoodTypes] = useState([]);
   const [recipes, setRecipes] = useState([]);
@@ -37,7 +37,25 @@ function SearchTab() {
         }
       });
   }, []);
+  const handleFavoriteClick = (recipeId) => {
+    // Check if the recipe is already in favorites
+    const isFavorite = favRecipes.some(
+      (favRecipe) => favRecipe._id === recipeId
+    );
 
+    if (isFavorite) {
+      // If it's already in favorites, remove it
+      setFavRecipes((prevFavoriteRecipes) =>
+        prevFavoriteRecipes.filter((favRecipe) => favRecipe._id !== recipeId)
+      );
+    } else {
+      // If it's not in favorites, add it
+      setFavRecipes((prevFavoriteRecipes) => [
+        ...prevFavoriteRecipes,
+        recipes.find((recipe) => recipe._id === recipeId),
+      ]);
+    }
+  };
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
   };
@@ -90,7 +108,11 @@ function SearchTab() {
       <div className="recipe-box">
         {(selectedFilter !== null ? foodTypes : filteredRecipes).map(
           (recipes) => (
-            <RecipeCardBook key={recipes._id} recipe={recipes} />
+            <RecipeCardBook
+              key={recipes._id}
+              recipe={recipes}
+              handleFavoriteClick={handleFavoriteClick}
+            />
           )
         )}
       </div>

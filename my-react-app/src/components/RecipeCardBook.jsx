@@ -4,7 +4,7 @@ import RecipeCardPage2 from "./RecipeCardPage2"; // Second page component
 import RecipeCardPage3 from "./RecipeCardPage3"; // Third page component
 import "./styles/RecipeCardBook.css";
 
-const RecipeCardBook = ({ recipe }) => {
+const RecipeCardBook = ({ recipe, handleFavoriteClick }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const nextPage = () => {
@@ -19,6 +19,7 @@ const RecipeCardBook = ({ recipe }) => {
     <div className="recipe-card-book">
       {currentPage === 1 && (
         <RecipeCardPage1
+          handleFavoriteClick={handleFavoriteClick}
           recipe={recipe}
           currentPage={currentPage}
           nextPage={nextPage}

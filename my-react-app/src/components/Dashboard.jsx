@@ -12,6 +12,7 @@ import "./styles/Dashboard.css";
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("");
+  const [favRecipes, setFavRecipes] = useState([]);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -19,7 +20,7 @@ function Dashboard() {
     console.log("loggingout");
     navigate("/");
   };
-
+  console.log("here we go : ", favRecipes);
   return (
     <div className="dashboard">
       <aside className="profile">
@@ -41,7 +42,15 @@ function Dashboard() {
         </div>
         <div className="content">
           <Routes>
-            <Route path="/search" element={<SearchTab />} />
+            <Route
+              path="/search"
+              element={
+                <SearchTab
+                  favRecipes={favRecipes}
+                  setFavRecipes={setFavRecipes}
+                />
+              }
+            />
             <Route path="/add-recipe" element={<AddRecipeTab />} />
             <Route path="/favorites" element={<FavoritesTab />} />
             <Route path="/previously-tried" element={<PreviouslyTriedTab />} />

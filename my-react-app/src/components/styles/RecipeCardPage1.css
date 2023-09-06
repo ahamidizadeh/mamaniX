@@ -18,6 +18,12 @@ h4 {
   flex-direction: column;
   overflow: hidden;
 }
+.fav-icon:hover {
+  color: red;
+}
+.fav-icon-active {
+  color: blue;
+}
 .recipe-card:hover {
   background-color: rgb(124, 124, 9);
   transform: scale(1.02);
