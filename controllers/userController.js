@@ -29,7 +29,6 @@ router.post("/register", async (req, res) => {
     const token = jwt.sign({ _id: newUser._id }, JWT_SECRET);
     res.status(201).json({ message: "User registered successfully", token });
   } catch (err) {
-    console.log("Error:", err);
     res.status(500).json({ message: "Internal server error" });
   }
 });
@@ -50,9 +49,9 @@ router.post("/login", async (req, res) => {
     }
 
     const authToken = generateAccessToken({ userId: user._id });
-    console.log("A", authToken);
+
     const refreshToken = generateRefreshToken({ userId: user._id });
-    console.log("R", refreshToken);
+
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -65,11 +64,9 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/refresh-token", async (req, res) => {
-  console.log("trying to refresh token");
-
   try {
     const refreshToken = req.cookies.refreshToken;
-    console.log("this is the refresh Token in server :", refreshToken);
+
     if (!refreshToken) {
       return res.status(401).json({ message: "refresh token missing" });
     }
@@ -79,7 +76,6 @@ router.post("/refresh-token", async (req, res) => {
 
     res.json({ authToken });
   } catch (error) {
-    console.log("error refreshing access token", error);
     res.status(401).json({ error: "Unauthorized" });
   }
 });

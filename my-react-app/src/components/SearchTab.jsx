@@ -37,23 +37,30 @@ function SearchTab({ favRecipes, setFavRecipes }) {
         }
       });
   }, []);
-  const handleFavoriteClick = (recipeId) => {
-    // Check if the recipe is already in favorites
+  const handleFavoriteClick = async (recipeId) => {
     const isFavorite = favRecipes.some(
       (favRecipe) => favRecipe._id === recipeId
     );
 
     if (isFavorite) {
-      // If it's already in favorites, remove it
       setFavRecipes((prevFavoriteRecipes) =>
         prevFavoriteRecipes.filter((favRecipe) => favRecipe._id !== recipeId)
       );
+      await api.post(`/recipes/remove-favorite/${recipeId}`, null, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      });
     } else {
-      // If it's not in favorites, add it
       setFavRecipes((prevFavoriteRecipes) => [
         ...prevFavoriteRecipes,
         recipes.find((recipe) => recipe._id === recipeId),
       ]);
+      await api.post(`/recipes/add-favorite/${recipeId}`, null, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      });
     }
   };
   const handleSearchChange = (event) => {

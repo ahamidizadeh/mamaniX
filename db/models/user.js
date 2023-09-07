@@ -18,7 +18,13 @@ const userSchema = new mongoose.Schema({
   savedRecipes: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Recipe", // Assuming you have a Recipe model
+      ref: "Recipe",
+    },
+  ],
+  favorites: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Recipe",
     },
   ],
 });

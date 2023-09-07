@@ -8,11 +8,8 @@ const verifyAccessToken = (token) => {
   return new Promise((resolve, reject) => {
     jwt.verify(token, JWT_SECRET, (error, decoded) => {
       if (error) {
-        console.log(error);
-        console.log("authtoken has very much expired");
         reject(error);
       } else {
-        console.log("decoding authtoken");
         resolve(decoded);
       }
     });
@@ -23,7 +20,6 @@ const verifyRefreshToken = (token) => {
   return new Promise((resolve, reject) => {
     jwt.verify(token, JWT_REFRESH_SECRET, (error, decoded) => {
       if (error) {
-        console.log("error is at verifyRefreshToken");
         reject(error);
       } else {
         resolve(decoded);

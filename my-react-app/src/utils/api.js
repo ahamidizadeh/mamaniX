@@ -28,19 +28,18 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    console.log("this is the request: ", originalRequest);
+
     if (
       originalRequest.url === "/login" &&
       error.reponse &&
       error.response.status === 401
     ) {
       prompt("invalid username or password");
-      console.log("back to login");
+
       return;
     } else if (error.response && error.response.status === 401) {
       console.log("atleasthere ");
       if (!isRefreshing && !isTokenValid()) {
-        console.log("going for refresh");
         isRefreshing = true;
 
         try {
@@ -49,7 +48,6 @@ api.interceptors.response.use(
             const newAuthToken = response.data.authToken;
             localStorage.setItem("authToken", newAuthToken);
             originalRequest.headers["Authorization"] = `Bearer ${newAuthToken}`;
-            console.log("new authToken set");
 
             const retryResponse = await api(originalRequest);
 
@@ -82,8 +80,6 @@ api.interceptors.response.use(
   }
 );
 api.interceptors.request.use((config) => {
-  console.log("sending request out ");
-  console.log("Request:", config);
   return config;
 });
 

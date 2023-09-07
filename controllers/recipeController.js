@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Recipe = require("../db/models/recipe"); // Import your Recipe model
+const Recipe = require("../db/models/recipe");
+const User = require("../db/models/user");
 const authenticateMiddleware = require("./middleware/authMiddleware");
 const multer = require("multer");
 const storage = multer.diskStorage({
@@ -61,4 +62,49 @@ router.get("/", authenticateMiddleware, async (req, res) => {
   }
 });
 
+router.post(
+  "/add-favorite/:recipeId",
+  authenticateMiddleware,
+  async (req, res) => {
+    try {
+      const userId = req.user.id;
+      const recipeId = req.params.recipeId;
+      const user = await User.findById(userId);
+
+      if (!user.favorites.includes(recipeId)) {
+        user.favorites.push(recipeId);
+        await user.save();
+      }
+
+      console.log("added to favs");
+      res.status(201).json({ message: "you are adding to favs" });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
+router.post(
+  "/remove-favorite/:recipeId",
+  authenticateMiddleware,
+  async (req, res) => {
+    try {
+      const userId = req.user.id;
+      const recipeId = req.params.recipeId;
+
+      const user = await User.findById(userId);
+      const index = user.favorites.indexOf(recipeId);
+
+      if (index !== -1) {
+        user.favorites.splice(index, 1);
+        await user.save();
+      }
+
+      console.log("removed from favs");
+      res.status(201).json({ message: "you are adding to favs" });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
 module.exports = router;
