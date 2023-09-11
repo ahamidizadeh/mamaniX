@@ -12,7 +12,7 @@ function RegisterModal({ closeModal }) {
     const userData = { username, password };
 
     try {
-      const response = await api.post("/register", userData);
+      const response = await api.post("/user/register", userData);
 
       if (response.status === 201) {
         const token = response.data.token;

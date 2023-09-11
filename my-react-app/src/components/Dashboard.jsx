@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import api from "../utils/api";
 import ProfileSection from "./ProfileSection";
 import NavigationTabs from "./NavigationTabs";
 import SearchTab from "./SearchTab";
@@ -7,20 +8,27 @@ import ShoppingListTab from "./ShoppingListTab";
 import AddRecipeTab from "./AddRecipeTab";
 import FavoritesTab from "./FavoritesTab";
 import PreviouslyTriedTab from "./PreviouslyTriedTab";
+import socket from "../utils/websocketClient";
 
 import "./styles/Dashboard.css";
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("");
+  const [fetchData, setFetchData] = useState(false);
   const [favRecipes, setFavRecipes] = useState([]);
   const navigate = useNavigate();
+
+  // const updateFavRecipes = (newFavRecipes) => {
+  //   setFavRecipes((prevFavRecipes) => [...prevFavRecipes, newFavRecipes]);
+  // };
+  useEffect(() => {}, []);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     console.log("loggingout");
     navigate("/");
   };
-  console.log("here we go : ", favRecipes);
+
   return (
     <div className="dashboard">
       <aside className="profile">

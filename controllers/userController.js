@@ -2,6 +2,8 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../db/models/user");
 const jwt = require("jsonwebtoken");
+const authenticateMiddleware = require("./middleware/authMiddleware");
+
 const router = express.Router();
 const {
   verifyRefreshToken,
@@ -77,6 +79,23 @@ router.post("/refresh-token", async (req, res) => {
     res.json({ authToken });
   } catch (error) {
     res.status(401).json({ error: "Unauthorized" });
+  }
+});
+
+router.get("/favorite-recipes", authenticateMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const user = await User.findById(userId).populate("favorites");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const favoriteRecipes = user.favorites;
+    console.log("getting fav recipes");
+    res.status(200).json({ favoriteRecipes });
+  } catch (error) {
+    console.log("error getting the favorites: ", error);
   }
 });
 module.exports = router;

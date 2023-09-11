@@ -5,25 +5,27 @@ import styled from "@emotion/styled";
 const RecipeCardPage1 = ({
   recipe,
   currentPage,
+  favorited,
   nextPage,
   prevPage,
   handleFavoriteClick,
 }) => {
-  const [isFavorited, setIsFavorited] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(favorited);
   const imageSrc = `http://localhost:1234/${recipe.image}`;
-
+  console.log("page1 status", favorited);
   const StyledHeartIcon = styled(FavoriteIcon)`
-    color: ${(props) => (props.clicked ? "red" : "white")};
+    color: ${isFavorited ? "red" : "white"};
     cursor: pointer;
 
     &:hover {
       color: red;
     }
   `;
-  const handleToggle = () => {
+  const handleToggle = (recipeId) => {
     setIsFavorited((prevIsFavorite) => !prevIsFavorite);
-    handleFavoriteClick(recipe._id);
+    handleFavoriteClick(recipeId);
   };
+
   return (
     <div className="recipe-card-page1">
       <img src={imageSrc} alt={recipe.title} className="recipe-image" />

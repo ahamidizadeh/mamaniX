@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import RecipeCardBook from "./RecipeCardBook";
-import NavigationTabs from "./NavigationTabs";
 import "./styles/SearchTab.css";
 import api from "../utils/api";
 function SearchTab({ favRecipes, setFavRecipes }) {
+  // const [favRecipes, setFavRecipes] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [foodTypes, setFoodTypes] = useState([]);
   const [recipes, setRecipes] = useState([]);
@@ -20,14 +20,34 @@ function SearchTab({ favRecipes, setFavRecipes }) {
   ];
 
   useEffect(() => {
+    const fetchFavoriteRecipes = async () => {
+      try {
+        await api
+          .get("/user/favorite-recipes", {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            },
+          })
+          .then((response) => {
+            const favorites = response.data.favoriteRecipes;
+            console.log("response: ", favorites);
+            setFavRecipes(favorites);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchFavoriteRecipes();
+
     api
-      .get("http://localhost:1234/api/recipes", {
+      .get("/recipes", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("authToken")}`,
         },
       })
       .then((response) => {
         setRecipes(response.data);
+        console.log("recipes included");
       })
       .catch((error) => {
         if (error.response && error.response.status === 401) {
@@ -37,38 +57,50 @@ function SearchTab({ favRecipes, setFavRecipes }) {
         }
       });
   }, []);
+  console.log("favorites", favRecipes);
   const handleFavoriteClick = async (recipeId) => {
-    const isFavorite = favRecipes.some(
-      (favRecipe) => favRecipe._id === recipeId
-    );
+    // updateFavRecipes(recipeId);
 
-    if (isFavorite) {
-      setFavRecipes((prevFavoriteRecipes) =>
-        prevFavoriteRecipes.filter((favRecipe) => favRecipe._id !== recipeId)
+    try {
+      const isFavorite = favRecipes.some(
+        (favRecipe) => favRecipe._id === recipeId
       );
-      await api.post(`/recipes/remove-favorite/${recipeId}`, null, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        },
-      });
-    } else {
-      setFavRecipes((prevFavoriteRecipes) => [
-        ...prevFavoriteRecipes,
-        recipes.find((recipe) => recipe._id === recipeId),
-      ]);
-      await api.post(`/recipes/add-favorite/${recipeId}`, null, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        },
-      });
+
+      if (isFavorite) {
+        // setFavRecipes((prevFavoriteRecipes) =>
+        //   prevFavoriteRecipes.filter((favRecipe) => favRecipe._id !== recipeId)
+        // );
+        await api.post(`/recipes/remove-favorite/${recipeId}`, null, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        });
+      } else {
+        // setFavRecipes((prevFavoriteRecipes) => [
+        //   ...prevFavoriteRecipes,
+        //   recipes.find((recipe) => recipe._id === recipeId),
+        // ]);
+        await api.post(`/recipes/add-favorite/${recipeId}`, null, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        });
+      }
+      fetchData(true);
+    } catch (error) {
+      console.log("there was an error adding to favorties");
     }
   };
+  const favIds = favRecipes.map((r) => r._id);
+  console.log("ids", favIds);
+  console.log("ine", favIds.includes("64f27a68f8a88d10585e4edd"));
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
   };
   const filteredRecipes = recipes.filter((recipe) =>
     recipe.title.toLowerCase().includes(searchValue.toLowerCase())
   );
+
   const handleFilterClick = (filterId) => {
     if (filterId === 0) {
       setSelectedFilter(null);
@@ -87,7 +119,6 @@ function SearchTab({ favRecipes, setFavRecipes }) {
       );
       setFoodTypes(filteredByType);
     }
-    console.log("filter status", selectedFilter, foodTypes);
   };
 
   return (
@@ -112,16 +143,16 @@ function SearchTab({ favRecipes, setFavRecipes }) {
           </button>
         ))}
       </div>
+
       <div className="recipe-box">
-        {(selectedFilter !== null ? foodTypes : filteredRecipes).map(
-          (recipes) => (
-            <RecipeCardBook
-              key={recipes._id}
-              recipe={recipes}
-              handleFavoriteClick={handleFavoriteClick}
-            />
-          )
-        )}
+        {(selectedFilter !== null ? foodTypes : filteredRecipes).map((r) => (
+          <RecipeCardBook
+            favorited={favIds.includes(r._id)}
+            key={r._id}
+            recipe={r}
+            handleFavoriteClick={handleFavoriteClick}
+          />
+        ))}
       </div>
     </div>
   );

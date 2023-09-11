@@ -10,6 +10,7 @@ function App() {
   // const { isAuthenticated, setIsAuthenticated } = useAuth();
   // // console.log("homepage:", isAuthenticated);
   // const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+
   return (
     <AuthProvider>
       <Router>

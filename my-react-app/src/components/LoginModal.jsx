@@ -12,7 +12,7 @@ function LoginModal({ closeModal, setIsAuthenticated }) {
     event.preventDefault();
     const userData = { username, password };
     try {
-      const response = await api.post("/login", userData);
+      const response = await api.post("/user/login", userData);
 
       if (response.status >= 200 && response.status < 300) {
         localStorage.setItem("isAuthenticated", true);

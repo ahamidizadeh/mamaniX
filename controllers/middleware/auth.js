@@ -8,6 +8,7 @@ const verifyAccessToken = (token) => {
   return new Promise((resolve, reject) => {
     jwt.verify(token, JWT_SECRET, (error, decoded) => {
       if (error) {
+        console.log("error in the verifyAccess token", error);
         reject(error);
       } else {
         resolve(decoded);
@@ -29,7 +30,7 @@ const verifyRefreshToken = (token) => {
 };
 
 const generateAccessToken = (payload) => {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: "15s" });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: "15h" });
 };
 
 const generateRefreshToken = (payload) => {

@@ -4,6 +4,7 @@ const { verifyAccessToken } = require("./auth");
 const authenticateMiddleware = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
+
     const decoded = await verifyAccessToken(token);
 
     const user = await User.findById(decoded.userId);

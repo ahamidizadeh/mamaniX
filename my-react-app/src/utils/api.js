@@ -37,13 +37,17 @@ api.interceptors.response.use(
       prompt("invalid username or password");
 
       return;
-    } else if (error.response && error.response.status === 401) {
+    } else if (
+      error.response &&
+      error.response.status === 401 &&
+      originalRequest.url === "/user/*"
+    ) {
       console.log("atleasthere ");
       if (!isRefreshing && !isTokenValid()) {
         isRefreshing = true;
 
         try {
-          const response = await api.post("/refresh-token");
+          const response = await api.post("user/refresh-token");
           if (response.status === 200) {
             const newAuthToken = response.data.authToken;
             localStorage.setItem("authToken", newAuthToken);
