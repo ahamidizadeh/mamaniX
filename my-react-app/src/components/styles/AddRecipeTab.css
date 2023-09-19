@@ -75,3 +75,32 @@
     /* align-items: stretch; */
   }
 }
+.mannual-add {
+  float: left;
+}
+.search-add {
+  float: right;
+}
+.addition-box {
+  display: block;
+  background-color: red;
+  height: 400px;
+}
+.mannual-add {
+  width: 200px;
+  color: black;
+  float: left;
+
+  background-color: inherit;
+}
+.search-add {
+  float: right;
+}
+.macros {
+  margin-top: 150px;
+}
+.addition {
+  display: flex;
+  margin: 25px;
+  justify-content: space-between;
+}

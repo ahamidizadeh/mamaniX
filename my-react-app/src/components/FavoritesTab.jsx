@@ -1,11 +1,14 @@
 // FavoritesTab.jsx
 import React from "react";
 import "./styles/FavoritesTab.css";
-
-function FavoritesTab() {
+import RecipeCardBook from "./RecipeCardBook";
+function FavoritesTab({ favorites }) {
+  console.log(favorites);
   return (
-    <div className="tab-content">
-      <h1 className="header">Favorites</h1>
+    <div className="recipe-box">
+      {favorites.map((fav) => (
+        <RecipeCardBook recipe={fav} />
+      ))}
     </div>
   );
 }

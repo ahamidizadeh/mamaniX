@@ -14,13 +14,9 @@ import "./styles/Dashboard.css";
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("");
-  const [fetchData, setFetchData] = useState(false);
   const [favRecipes, setFavRecipes] = useState([]);
   const navigate = useNavigate();
 
-  // const updateFavRecipes = (newFavRecipes) => {
-  //   setFavRecipes((prevFavRecipes) => [...prevFavRecipes, newFavRecipes]);
-  // };
   useEffect(() => {}, []);
 
   const handleLogout = () => {
@@ -60,7 +56,10 @@ function Dashboard() {
               }
             />
             <Route path="/add-recipe" element={<AddRecipeTab />} />
-            <Route path="/favorites" element={<FavoritesTab />} />
+            <Route
+              path="/favorites"
+              element={<FavoritesTab favorites={favRecipes} />}
+            />
             <Route path="/previously-tried" element={<PreviouslyTriedTab />} />
             <Route path="/shopping-list" element={<ShoppingListTab />} />
           </Routes>
