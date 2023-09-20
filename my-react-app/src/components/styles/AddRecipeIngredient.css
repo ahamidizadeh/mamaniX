@@ -1,0 +1,27 @@
+.ingredient-pic {
+  padding: 5px;
+  border-radius: 50%;
+}
+.ingredient-item {
+  border-radius: 15%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  background-color: white;
+  color: black;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.tooltip {
+  display: none;
+  position: absolute;
+  background-color: #d6a761;
+  border-radius: 10%;
+  width: 150px;
+  height: 175px;
+  border: 1px solid #ccc;
+
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.ingredient-item:hover .tooltip {
+  display: inline;
+}

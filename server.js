@@ -27,7 +27,14 @@ const pool = new Pool({
   password: "",
   port: 5432, // PostgreSQL default port
 });
-
+app.get("/api/ingredients", async (req, res) => {
+  try {
+    const ingredients = await pool.query("SELECT * FROM ingredients");
+    res.status(200).json(ingredients.rows);
+  } catch (error) {
+    console.log("error in getting all the ingredients");
+  }
+});
 app.get("/api/ingredients/search", async (req, res) => {
   try {
     const ingredient = req.query.name;

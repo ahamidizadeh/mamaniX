@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import AddRecipeIngredientList from "./AddRecipeIngredientList";
 import "./styles/AddRecipeTab.css";
+import RecipesMacros from "./RecipesMacros";
 import api from "../utils/api";
 
 function AddRecipeTab() {
+  const [allIngredients, setAllIngredients] = useState([]);
   const [addIngredient, setAddIngredient] = useState("");
   const [ingredient2, setIngredient2] = useState({
     name: "",
@@ -30,10 +32,17 @@ function AddRecipeTab() {
   });
 
   useEffect(() => {
-    const authToken = localStorage.getItem("authToken");
-    if (!authToken) {
-      console.log("authtoken has expired");
+    async function getIngredients() {
+      try {
+        const res = await api.get("/ingredients");
+        const allIngredients = res.data;
+        // console.log("all of the ingredients", allIngredients);
+        setAllIngredients(allIngredients);
+      } catch (error) {
+        console.log(error);
+      }
     }
+    getIngredients();
   }, []);
 
   const handleTypeOfFoodChange = (event) => {
@@ -160,11 +169,14 @@ function AddRecipeTab() {
           <button onClick={handleGetIngredients}>add ingredient</button>
         </div>
         <div className="search-add">
-          <AddRecipeIngredientList ingredient={ingredient2} />
+          <AddRecipeIngredientList
+            ingredient={ingredient2}
+            allIngredients={allIngredients}
+          />
         </div>
       </div>
       <div className="macros">
-        <h3>macros</h3>
+        <RecipesMacros />
       </div>
     </div>
     // <div className="tab-content">

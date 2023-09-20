@@ -83,22 +83,33 @@
 }
 .addition-box {
   display: block;
-  background-color: red;
+  background-color: rgba(84, 53, 53, 0.18);
   height: 400px;
 }
 .mannual-add {
+  margin-top: 65px;
+  margin-left: 25px;
   width: 200px;
   color: black;
   float: left;
 
   background-color: inherit;
 }
+.mannual-add > input {
+  background-color: rgb(214, 182, 182);
+  height: 23px;
+  color: black;
+}
+.mannual-add > button {
+  margin-top: 25px;
+}
 .search-add {
+  margin-top: 50px;
   float: right;
 }
-.macros {
+/* .macros {
   margin-top: 150px;
-}
+} */
 .addition {
   display: flex;
   margin: 25px;
