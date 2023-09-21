@@ -1,8 +1,21 @@
 .ingredient-pic {
   padding: 5px;
   border-radius: 50%;
+  transition: transform 0.2 ease;
+}
+.navigation-ingredient {
+  background-color: #eece9f;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.navigation-ingredient > h3 {
+  margin: 0;
 }
 .ingredient-item {
+  position: relative;
+  cursor: pointer;
   border-radius: 15%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -10,18 +23,29 @@
   background-color: white;
   color: black;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-attachment: fixed;
+  min-height: 294px;
+  min-width: 200px;
+}
+.category-bar {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
 }
 .tooltip {
-  display: none;
+  opacity: 0;
   position: absolute;
-  background-color: #d6a761;
+  background-color: #eece9f;
   border-radius: 10%;
   width: 150px;
   height: 175px;
   border: 1px solid #ccc;
-
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: opacity 10s ease;
 }
 .ingredient-item:hover .tooltip {
-  display: inline;
+  opacity: 1;
+}
+.ingredient-pic:hover {
+  transform: scale(1.2);
 }

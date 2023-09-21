@@ -36,7 +36,6 @@ function AddRecipeTab() {
       try {
         const res = await api.get("/ingredients");
         const allIngredients = res.data;
-        // console.log("all of the ingredients", allIngredients);
         setAllIngredients(allIngredients);
       } catch (error) {
         console.log(error);
@@ -116,6 +115,9 @@ function AddRecipeTab() {
   const handleInputIngChange = (e) => {
     setAddIngredient(e.target.value);
   };
+  const filteredIngredient = allIngredients.filter((ing) =>
+    ing.name.toLowerCase().includes(addIngredient)
+  );
 
   const handleAddIngredient = (e) => {
     e.preventDefault();
@@ -170,6 +172,7 @@ function AddRecipeTab() {
         </div>
         <div className="search-add">
           <AddRecipeIngredientList
+            searchFilter={filteredIngredient}
             ingredient={ingredient2}
             allIngredients={allIngredients}
           />
