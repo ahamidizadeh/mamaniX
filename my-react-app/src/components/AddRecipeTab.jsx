@@ -4,8 +4,10 @@ import AddRecipeIngredientList from "./AddRecipeIngredientList";
 import "./styles/AddRecipeTab.css";
 import RecipesMacros from "./RecipesMacros";
 import api from "../utils/api";
+import RecipeBuilder from "./RecipeBuilder";
 
 function AddRecipeTab() {
+  const [selectedIngredient, setSelectedIngredient] = useState(null);
   const [allIngredients, setAllIngredients] = useState([]);
   const [addIngredient, setAddIngredient] = useState("");
   const [ingredient2, setIngredient2] = useState({
@@ -168,10 +170,16 @@ function AddRecipeTab() {
             value={addIngredient}
             onChange={handleInputIngChange}
           />
+          <RecipeBuilder
+            selectedIngredient={selectedIngredient}
+            setSelectedIngredient={setSelectedIngredient}
+          />
           <button onClick={handleGetIngredients}>add ingredient</button>
         </div>
+
         <div className="search-add">
           <AddRecipeIngredientList
+            setSelectedIngredient={setSelectedIngredient}
             searchFilter={filteredIngredient}
             ingredient={ingredient2}
             allIngredients={allIngredients}

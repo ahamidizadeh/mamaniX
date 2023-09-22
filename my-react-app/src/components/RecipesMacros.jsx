@@ -5,6 +5,7 @@ function RecipesMacros() {
   const [userFats, setUserFats] = useState(0);
   const [userCarbs, setUserCarbs] = useState(0);
   const [ingredients, setIngredients] = useState([]);
+
   return <h3>Recipe Macros</h3>;
 }
 

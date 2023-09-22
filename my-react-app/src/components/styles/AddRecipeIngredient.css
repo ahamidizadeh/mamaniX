@@ -1,5 +1,13 @@
+.image-container {
+  max-height: 60px;
+  margin: 0;
+  padding: 0;
+}
+
 .ingredient-pic {
   padding: 5px;
+  margin: 0;
+  /* max-height: 40px; */
   border-radius: 50%;
   transition: transform 0.2 ease;
 }
@@ -19,6 +27,7 @@
   border-radius: 15%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   grid-gap: 10px;
   background-color: white;
   color: black;

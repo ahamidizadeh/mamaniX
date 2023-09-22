@@ -84,7 +84,7 @@
 .addition-box {
   display: block;
   background-color: rgba(84, 53, 53, 0.18);
-  height: 400px;
+  height: 500px;
 }
 .mannual-add {
   margin-top: 65px;
@@ -92,7 +92,7 @@
   width: 200px;
   color: black;
   float: left;
-
+  min-height: 500px;
   background-color: inherit;
 }
 .mannual-add > input {
