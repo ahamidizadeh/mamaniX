@@ -8,7 +8,6 @@ import ShoppingListTab from "./ShoppingListTab";
 import AddRecipeTab from "./AddRecipeTab";
 import FavoritesTab from "./FavoritesTab";
 import PreviouslyTriedTab from "./PreviouslyTriedTab";
-import socket from "../utils/websocketClient";
 
 import "./styles/Dashboard.css";
 

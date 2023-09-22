@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./styles/RecipeBuilder.css"; // Add your CSS for styling
-
+import api from "../utils/api";
 function RecipeBuilder({ selectedIngredient, setSelectedIngredient }) {
   const [droppedIngredients, setDroppedIngredients] = useState([]);
+  const [dropzoneHeading, setDropzoneHeading] = useState("Drag Here");
   //   const [selectedIngredient, setSelectedIngredient] = useState(null);
 
   //   const handleDragStart = (ingredient) => (event) => {
@@ -10,7 +11,7 @@ function RecipeBuilder({ selectedIngredient, setSelectedIngredient }) {
   //     // Start the drag operation when an ingredient is dragged
   //     event.dataTransfer.setData("text/plain", JSON.stringify(ingredient));
   //   };
-
+  console.log("selected ingredient:", selectedIngredient);
   const handleDrop = (event) => {
     event.preventDefault();
     if (selectedIngredient) {
@@ -46,22 +47,19 @@ function RecipeBuilder({ selectedIngredient, setSelectedIngredient }) {
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
-        {/* Display the area where ingredients can be dropped */}
-        {/* You can style this area and add a background image, etc. */}
+        {dropzoneHeading}
         {selectedIngredient && (
           <div className="selected-ingredient">
-            {/* Display the selected ingredient (image) */}
             <img
-              src={selectedIngredient.imageUrl}
+              src={`http://localhost:1234/${selectedIngredient.image}`}
               alt={selectedIngredient.name}
-              draggable="false" // Prevent the selected image from being draggable
+              draggable="false"
             />
           </div>
         )}
       </div>
 
       <div className="dropped-ingredients">
-        {/* Display the dropped ingredients with quantities */}
         {droppedIngredients.map((ingredient, index) => (
           <div key={index} className="dropped-ingredient" draggable>
             {ingredient.quantity} - {ingredient.name}

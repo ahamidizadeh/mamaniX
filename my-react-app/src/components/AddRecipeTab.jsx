@@ -32,7 +32,7 @@ function AddRecipeTab() {
     ingredients: [],
     instructions: "",
   });
-
+  console.log(selectedIngredient);
   useEffect(() => {
     async function getIngredients() {
       try {
