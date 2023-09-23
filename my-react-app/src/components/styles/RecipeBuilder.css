@@ -1,31 +1,57 @@
 .recipe-builder-container {
-  margin-top: 10px;
+  color: black;
+  margin-top: 33px;
   border-radius: 15px;
-  color: rgb(21, 21, 21);
-  border: solid;
+  color: antiquewhite;
+  border-width: 2px;
+
   height: 200px;
 }
 .ingredient-dropzone {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 15px;
   font-weight: bold;
-  border: darkblue;
-  border-color: rgb(77, 175, 35);
-  height: 75px;
+  border-radius: 15px;
+  border: dotted;
+  border-width: 2px;
+  border-color: rgb(29, 61, 15);
+  margin-bottom: 5px;
+  height: 95px;
 }
 .dropped-ingredients {
+  color: black;
+  border-radius: 15px;
+  background-color: antiquewhite;
+  border: 15px;
   text-align: left;
   padding: 10px;
   font-size: 15px;
   overflow-y: auto;
   font-family: monospace;
-  height: 100px;
+  height: 125px;
+}
+.dropped-ingredients > button {
+  color: black;
 }
 .selected-ingredient {
   margin: 10px;
 }
 .selected-ingredient > img {
   border-radius: 15px;
+}
+.recipe-builder-container > button {
+  position: absolute;
+  height: 20px;
+  text-align: center;
+  line-height: 5px;
+  width: 50px;
+  margin-left: 45px;
+  margin-top: 3px;
+  padding: 0;
+  border: none;
+}
+.recipe-builder-container > button:hover {
+  background-color: rgb(97, 3, 3);
 }
 /* .dropped-ingredients-container {
   flex: 1;

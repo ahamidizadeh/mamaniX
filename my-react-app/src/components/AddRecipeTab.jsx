@@ -32,7 +32,7 @@ function AddRecipeTab() {
     ingredients: [],
     instructions: "",
   });
-  console.log(selectedIngredient);
+
   useEffect(() => {
     async function getIngredients() {
       try {
@@ -163,27 +163,26 @@ function AddRecipeTab() {
   return (
     <div className="addition-box">
       <div className="addition">
-        <div className="mannual-add">
+        <div className="search-add">
           <input
-            placeholder="search ingredient"
+            placeholder="Search ingredients"
             type="text"
             value={addIngredient}
             onChange={handleInputIngChange}
           />
-          <RecipeBuilder
-            selectedIngredient={selectedIngredient}
-            setSelectedIngredient={setSelectedIngredient}
-          />
-          <button onClick={handleGetIngredients}>add ingredient</button>
-        </div>
-
-        <div className="search-add">
           <AddRecipeIngredientList
             setSelectedIngredient={setSelectedIngredient}
             searchFilter={filteredIngredient}
             ingredient={ingredient2}
             allIngredients={allIngredients}
           />
+        </div>
+        <div className="mannual-add">
+          <RecipeBuilder
+            selectedIngredient={selectedIngredient}
+            setSelectedIngredient={setSelectedIngredient}
+          />
+          <button onClick={handleGetIngredients}>Add Recipe</button>
         </div>
       </div>
       <div className="macros">

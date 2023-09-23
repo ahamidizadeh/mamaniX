@@ -58,3 +58,6 @@
 .ingredient-pic:hover {
   transform: scale(1.2);
 }
+.navigation-ingredient {
+  background-color: rgb(204, 173, 133);
+}

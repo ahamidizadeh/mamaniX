@@ -82,7 +82,7 @@
   float: right;
 }
 .addition-box {
-  display: block;
+  display: flex;
   background-color: rgba(84, 53, 53, 0.18);
   height: 500px;
 }
@@ -101,17 +101,33 @@
   color: black;
 }
 .mannual-add > button {
-  margin-top: 25px;
+  margin-top: 65px;
+  width: 200px;
+}
+.mannual-add > button:hover {
+  background-color: green;
 }
 .search-add {
   margin-top: 50px;
   float: right;
 }
+.search-add > input {
+  color: grey;
+  background-color: antiquewhite;
+  text-align: center;
+  margin-bottom: 5px;
+  height: 20px;
+  width: 200px;
+}
 /* .macros {
   margin-top: 150px;
 } */
+
 .addition {
   display: flex;
   margin: 25px;
   justify-content: space-between;
+}
+.addition > input {
+  height: 15px;
 }

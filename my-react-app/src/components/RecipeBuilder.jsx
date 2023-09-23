@@ -34,7 +34,10 @@ function RecipeBuilder({ selectedIngredient, setSelectedIngredient }) {
       }
     }
   };
-
+  const handleClearClick = () => {
+    console.log("clearing");
+    setDroppedIngredients([]);
+  };
   const handleDragOver = (event) => {
     console.log("draggin");
     event.preventDefault();
@@ -58,8 +61,10 @@ function RecipeBuilder({ selectedIngredient, setSelectedIngredient }) {
           </div>
         )}
       </div>
-
+      <button onClick={handleClearClick}>clear</button>
       <div className="dropped-ingredients">
+        {"Ingredients:"}
+
         {droppedIngredients.map((ingredient, index) => (
           <div key={index} className="dropped-ingredient" draggable>
             {ingredient.quantity} - {ingredient.name}
