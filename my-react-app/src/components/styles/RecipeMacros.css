@@ -1,0 +1,66 @@
+/* Circle container style */
+.recipe-macros {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+}
+.target-input {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.circle-inner {
+  width: 100px;
+  height: 100px;
+  border: dashed 3px rgb(83, 4, 4);
+  border-radius: 50%;
+  background-color: inherit;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  transition: transform 0.2 ease;
+}
+.circle-inner:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+p {
+  color: black;
+}
+/* }
+.percentage {
+  display: none;
+} */
+.circle-inner > input {
+  text-align: center;
+  color: black;
+  border: none;
+  background-color: rgb(220, 202, 166);
+  border-radius: 25%;
+  margin-top: 10px;
+  width: 40px;
+}
+
+.target-input > label {
+  color: black;
+  font-size: medium;
+  font-weight: bold;
+  /* margin-right: 18px; */
+  /* margin-bottom: 250px; */
+}
+.target-input > input {
+  margin-bottom: 5px;
+  width: 15px;
+}
+.button-macro {
+  text-align: center;
+  background-color: rgb(98, 28, 28);
+  margin-top: 5px;
+  height: 35px;
+  width: 125px;
+}
+.button-macro:hover {
+  background-color: rgb(169, 97, 15);
+}

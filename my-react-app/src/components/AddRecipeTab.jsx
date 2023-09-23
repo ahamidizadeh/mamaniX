@@ -8,6 +8,7 @@ import RecipeBuilder from "./RecipeBuilder";
 
 function AddRecipeTab() {
   const [selectedIngredient, setSelectedIngredient] = useState(null);
+  const [recipeIngredients, setRecipeIngredients] = useState(null);
   const [allIngredients, setAllIngredients] = useState([]);
   const [addIngredient, setAddIngredient] = useState("");
   const [ingredient2, setIngredient2] = useState({
@@ -113,7 +114,9 @@ function AddRecipeTab() {
     const { name, value } = event.target;
     setIngredient((prev) => ({ ...prev, [name]: value }));
   };
-
+  const getDroppedIngredients = (droppedIngredient) => {
+    setRecipeIngredients(droppedIngredient);
+  };
   const handleInputIngChange = (e) => {
     setAddIngredient(e.target.value);
   };
@@ -181,12 +184,13 @@ function AddRecipeTab() {
           <RecipeBuilder
             selectedIngredient={selectedIngredient}
             setSelectedIngredient={setSelectedIngredient}
+            confirmedIngredients={getDroppedIngredients}
           />
           <button onClick={handleGetIngredients}>Add Recipe</button>
         </div>
       </div>
       <div className="macros">
-        <RecipesMacros />
+        <RecipesMacros recipeIngredients={recipeIngredients} />
       </div>
     </div>
     // <div className="tab-content">

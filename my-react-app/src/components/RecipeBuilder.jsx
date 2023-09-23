@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/RecipeBuilder.css"; // Add your CSS for styling
 import api from "../utils/api";
-function RecipeBuilder({ selectedIngredient, setSelectedIngredient }) {
+function RecipeBuilder({
+  selectedIngredient,
+  setSelectedIngredient,
+  confirmedIngredients,
+}) {
   const [droppedIngredients, setDroppedIngredients] = useState([]);
   const [dropzoneHeading, setDropzoneHeading] = useState("Drag Here");
-  //   const [selectedIngredient, setSelectedIngredient] = useState(null);
 
-  //   const handleDragStart = (ingredient) => (event) => {
-  //     setSelectedIngredient(ingredient);
-  //     // Start the drag operation when an ingredient is dragged
-  //     event.dataTransfer.setData("text/plain", JSON.stringify(ingredient));
-  //   };
-  console.log("selected ingredient:", selectedIngredient);
   const handleDrop = (event) => {
     event.preventDefault();
     if (selectedIngredient) {
@@ -30,13 +27,18 @@ function RecipeBuilder({ selectedIngredient, setSelectedIngredient }) {
           ...prevIngredients,
           ingredientWithQuantity,
         ]);
+
         setSelectedIngredient(null);
       }
     }
   };
+  useEffect(() => {
+    confirmedIngredients(droppedIngredients);
+  }, [droppedIngredients]);
   const handleClearClick = () => {
     console.log("clearing");
     setDroppedIngredients([]);
+    confirmedIngredients(droppedIngredients);
   };
   const handleDragOver = (event) => {
     console.log("draggin");

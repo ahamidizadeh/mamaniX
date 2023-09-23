@@ -31,7 +31,7 @@
   height: 125px;
 }
 .dropped-ingredients > button {
-  color: black;
+  background-color: rgb(186, 169, 40);
 }
 .selected-ingredient {
   margin: 10px;
@@ -53,10 +53,3 @@
 .recipe-builder-container > button:hover {
   background-color: rgb(97, 3, 3);
 }
-/* .dropped-ingredients-container {
-  flex: 1;
-  height: 100px;
-  
-  border: 2px solid #ccc;
-  padding: 10px;
-} */
